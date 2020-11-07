@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>eVendor</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div class="header">	
+	<div class="container">
+	<div class = "navbar"> 
+		<div class = "logo">
+		<img src="images/logo.png" width="125px">		
+		</div>
+		<nav>
+			<ul>
+				<li><a href="">Home</a></li>
+				<li><a href="">Category</a></li>
+				<li><a href="">About</a></li>
+				<li><a href="">Post</a></li>
+				<li><a href="">Login</a></li>
+				
+			</ul>
+		</nav>
+	</div>
+
+	</div>
+	</div> 
+	
+	<!-- account page -->
+	<div class="account-page">
+		<div class="form-container">
+			<div class="form-btn">
+				<span onclick="login()">Login</span>
+				<span onclick="register()">Register</span>
+				<hr id="formIndicator">
+			</div>
+			
+			<form id="LoginForm">
+				<input type="text" placeholder="Username">
+				<input type="password" placeholder="Password">
+				<button type="submit" class="btn" >Login</button>
+				<a href="">Forget password</a>
+			</form>
+						
+			<form id="RegForm">
+				<input type="text" placeholder="Username">
+				<input type="email" placeholder="Email">
+				<input type="password" placeholder="Password">
+				<button type="submit" class="btn">Register</button>
+				
+			</form>
+		</div>					
+	</div>
+	
+	
+	<!-- js for account login/register -->
+	<script>
+	var loginForm = document.getElementById("LoginForm");
+	var regForm = document.getElementById("RegForm");
+	var indicator = document.getElementById("formIndicator");
+	
+		function register(){
+			regForm.style.transform="translateX(0px)";
+			loginForm.style.transform="translateX(0px)";
+			indicator.style.transform="translateX(100px)";
+		}
+		
+		function login(){
+			regForm.style.transform="translateX(300px)";
+			loginForm.style.transform="translateX(300px)";
+			indicator.style.transform="translateX(0px)";
+		}
+	</script>
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+</body>
+</html>
