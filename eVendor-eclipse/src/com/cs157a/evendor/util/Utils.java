@@ -1,4 +1,4 @@
-package cs157a;
+package com.cs157a.evendor.util;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

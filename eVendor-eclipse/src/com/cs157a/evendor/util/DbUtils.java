@@ -1,4 +1,4 @@
-package cs157a;
+package com.cs157a.evendor.util;
 
 import java.io.FileInputStream;
 import java.sql.*;
@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+
+import com.cs157a.evendor.model.User;
 
 public class DbUtils {
 

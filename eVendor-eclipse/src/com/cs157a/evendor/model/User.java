@@ -1,4 +1,4 @@
-package cs157a;
+package com.cs157a.evendor.model;
 
 public class User {
 	long id;

@@ -4,7 +4,8 @@
 <%@ page import="org.apache.shiro.util.*" %>
 <%@ page import="java.sql.*"%>
 <%@ page import="java.util.*"%>
-<%@ page import="cs157a.*"%>
+<%@ page import="com.cs157a.evendor.model.*"%>
+<%@ page import="com.cs157a.evendor.util.*"%>
 <%!
     public boolean validate(String username, String password, User user) {
 		if(user != null){
