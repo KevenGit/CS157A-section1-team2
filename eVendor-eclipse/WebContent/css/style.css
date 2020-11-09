@@ -208,3 +208,24 @@ margin-top: 80px;
 	margin: 0 auto 8px;
 	position: relative;
 }
+
+.cat-list-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    min-width: 75%;
+}
+
+.cat-list-table thead tr {
+    background-color: #8080c0;
+    text-align: left;
+}
+
+.cat-list-table tbody tr {
+    border-bottom: 1px solid #000000;
+    background-color: #f3f3f3;
+}
+
+.cat-list-table th,
+.cat-list-table td {
+    padding: 12px 15px;
+}

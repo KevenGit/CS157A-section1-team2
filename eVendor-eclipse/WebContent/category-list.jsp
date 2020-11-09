@@ -32,18 +32,19 @@
 	</div> 
 	<%
 		String category = (String) request.getAttribute("category");
-		out.println("<h3>" + category.toUpperCase() + "</h3>");
+		out.println("<h1>" + category.toUpperCase() + "</h1>");
 		
-		out.println("<table style=\"width:100%\">");
+		out.println("<table class=\"cat-list-table\">");
 		
 		List<Map<String, Object>> result = (List) request.getAttribute("result");
 		
-    	out.println("<tr>");
+    	out.println("<thead>\n<tr>");
     	out.println("<th>Title</th>");
     	out.println("<th>Price</th>");
     	out.println("<th>Region</th>");
-    	out.println("</tr>");
+    	out.println("</tr>\n</thead>");
 		
+    	out.println("<tbody>");
         for (Map<String, Object> t : result) {
         	out.println("<tr>");
         	out.println("<td>" + t.get("title") + "</td>");
@@ -52,6 +53,7 @@
         	out.println("</tr>");
         }
         
+        out.println("</tbody>");
 		out.println("</table>");
 	%>
 </body>
