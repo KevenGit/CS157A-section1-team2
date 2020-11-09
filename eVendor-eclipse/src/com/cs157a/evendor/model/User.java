@@ -1,14 +1,15 @@
 package com.cs157a.evendor.model;
 
 public class User {
-	long id;
-	String username;
-	String hashedPassword;
-	String pwsalt;
-	String firstName;
-	String lastName;
-	String email;
+	private long id;
+	private String username;
+	private String hashedPassword;
+	private String pwsalt;
+	private String firstName;
+	private String lastName;
+	private String email;
 	long balance;
+	
 	public User(long id, String username, String hashedPassword, String pwsalt, String firstName, 
 			String lastName, String email, long balance) {
 		this.id = id;

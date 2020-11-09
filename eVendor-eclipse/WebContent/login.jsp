@@ -23,7 +23,7 @@
     String msg = "";
     String username = request.getParameter("login_username");
     String password = request.getParameter("login_password");
-    Connection conn = DbUtils.getConnection("/Users/Chicken/CS157A/e_vendor_data_test.properties");
+    Connection conn = DbUtils.getConnection(null);
     User user = DbUtils.getUser(conn, username);
     DbUtils.close(conn);
     if (validate(username, password, user)) {

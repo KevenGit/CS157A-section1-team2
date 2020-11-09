@@ -30,7 +30,7 @@
         String hashedPasswordBase64 = new Sha256Hash(password, salt, 1024).toBase64();
         String saltBase64 = salt.toBase64();
         // Add account:
-        Connection conn = DbUtils.getConnection("/Users/Chicken/CS157A/e_vendor_data_test.properties");
+        Connection conn = DbUtils.getConnection(null);
 	
         String sqlInsert = "INSERT INTO user(username, hash_pw, pw_salt, first_name, last_name, email, balance) VALUES (?, ?, ?, ?, ?, ?, ?)";
         List parameters = Arrays.asList(username, hashedPasswordBase64, saltBase64, "Hello", "World", email, 0);

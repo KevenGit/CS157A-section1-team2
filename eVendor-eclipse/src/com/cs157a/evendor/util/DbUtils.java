@@ -11,13 +11,18 @@ import java.util.Properties;
 import com.cs157a.evendor.model.User;
 
 public class DbUtils {
+	
+	private static final String propertiesPath = "WEB-INF/e_vendor_data_test.properties";
 
 	public static Connection getConnection(String fileName) {
 		FileInputStream fis = null;
 		Properties prop = null;		
 		Connection conn = null;
+		
+		String path = (fileName == null) ? propertiesPath : fileName;
+		
 		try {
-			fis = new FileInputStream(fileName);
+			fis = new FileInputStream(path);
 			prop = new Properties();
 			prop.load(fis);
 			Class.forName(prop.getProperty("jdbc_driver"));
