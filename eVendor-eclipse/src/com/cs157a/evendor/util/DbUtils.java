@@ -12,7 +12,7 @@ import com.cs157a.evendor.model.User;
 
 public class DbUtils {
 	
-	private static final String propertiesPath = "WEB-INF/e_vendor_data_test.properties";
+	private static final String propertiesPath = "./WEB-INF/e_vendor_data_test.properties";
 
 	public static Connection getConnection(String fileName) {
 		FileInputStream fis = null;

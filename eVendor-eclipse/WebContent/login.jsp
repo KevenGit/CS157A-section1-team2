@@ -23,7 +23,8 @@
     String msg = "";
     String username = request.getParameter("login_username");
     String password = request.getParameter("login_password");
-    Connection conn = DbUtils.getConnection(null);
+    Class.forName("com.mysql.cj.jdbc.Driver");
+    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/e_vendor_data_test?serverTimezone=EST5EDT","root", "root");
     User user = DbUtils.getUser(conn, username);
     DbUtils.close(conn);
     if (validate(username, password, user)) {

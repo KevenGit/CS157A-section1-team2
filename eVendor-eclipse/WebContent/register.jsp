@@ -30,7 +30,8 @@
         String hashedPasswordBase64 = new Sha256Hash(password, salt, 1024).toBase64();
         String saltBase64 = salt.toBase64();
         // Add account:
-        Connection conn = DbUtils.getConnection(null);
+       Class.forName("com.mysql.cj.jdbc.Driver");
+       Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/e_vendor_data_test?serverTimezone=EST5EDT","root", "root");
 	
         String sqlInsert = "INSERT INTO user(username, hash_pw, pw_salt, first_name, last_name, email, balance) VALUES (?, ?, ?, ?, ?, ?, ?)";
         List parameters = Arrays.asList(username, hashedPasswordBase64, saltBase64, "Hello", "World", email, 0);
