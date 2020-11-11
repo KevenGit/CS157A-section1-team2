@@ -1,6 +1,7 @@
 package com.cs157a.evendor.util;
 
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,20 +12,21 @@ import java.util.Properties;
 import com.cs157a.evendor.model.User;
 
 public class DbUtils {
-	
-	private static final String propertiesPath = "./WEB-INF/e_vendor_data_test.properties";
+			
+	public static Connection getConnection() {
+		return getConnection("/e_vendor_data_test.properties");
+	}
 
 	public static Connection getConnection(String fileName) {
-		FileInputStream fis = null;
+		//FileInputStream fis = null;
+		InputStream is = DbUtils.class.getClassLoader().getResourceAsStream(fileName);
 		Properties prop = null;		
 		Connection conn = null;
 		
-		String path = (fileName == null) ? propertiesPath : fileName;
-		
 		try {
-			fis = new FileInputStream(path);
+			//fis = new FileInputStream(fileName);
 			prop = new Properties();
-			prop.load(fis);
+			prop.load(is);
 			Class.forName(prop.getProperty("jdbc_driver"));
 			conn = DriverManager.getConnection(
 					prop.getProperty("url"),

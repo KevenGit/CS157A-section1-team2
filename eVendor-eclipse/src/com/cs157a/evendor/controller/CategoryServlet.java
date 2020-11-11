@@ -33,11 +33,11 @@ public class CategoryServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String category = request.getParameter("name").toLowerCase();
-		ResultSet rs = null;
 		
-		try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/e_vendor_data_test?serverTimezone=EST5EDT","root", "root");
+		try (Connection conn = DbUtils.getConnection()) {
+			
+            //Class.forName("com.mysql.cj.jdbc.Driver");
+            //Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/e_vendor_data_test?serverTimezone=EST5EDT","root", "root");
 			String query = "SELECT title, price, region FROM postings WHERE category = ? ";
 			
 			List<Object> params = new ArrayList<>();
@@ -47,8 +47,6 @@ public class CategoryServlet extends HttpServlet {
 			
 			request.setAttribute("result", result);
 			request.setAttribute("category", category);
-			
-			conn.close();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
