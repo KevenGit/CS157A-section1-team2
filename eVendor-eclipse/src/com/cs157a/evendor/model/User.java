@@ -47,4 +47,36 @@ public class User {
 	public long getBalance() {
 		return balance;
 	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public void setHashedPassword(String hashedPassword) {
+		this.hashedPassword = hashedPassword;
+	}
+
+	public void setPwsalt(String pwsalt) {
+		this.pwsalt = pwsalt;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setBalance(long balance) {
+		this.balance = balance;
+	}
 }
