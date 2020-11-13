@@ -1,5 +1,6 @@
 package com.cs157a.evendor.model;
 
+// This is an Admin class
 public class Admin {
 	private int id;
 	private String firstName;
