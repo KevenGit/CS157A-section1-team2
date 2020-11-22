@@ -89,27 +89,12 @@ public class DbUtils {
 			e.printStackTrace();
 		}
 	}
-
-	public static List<Map<String, Object>> map(ResultSet rs) throws SQLException {
-		List<Map<String, Object>> results = new ArrayList<Map<String, Object>>();
-		try {
-			if (rs != null) {
-				ResultSetMetaData meta = rs.getMetaData();
-				int numColumns = meta.getColumnCount();
-				while (rs.next()) {
-					Map<String, Object> row = new HashMap<String, Object>();
-					for (int i = 1; i <= numColumns; ++i) {
-						String name = meta.getColumnName(i);
-						Object value = rs.getObject(i);
-						row.put(name, value);
-					}
-					results.add(row);
-				}
-			}
-		} finally {
-			close(rs);
+	
+	public static List<Map<String, Object>> query(String sql, List<Object> params) throws SQLException {
+		try (Connection conn = getConnection())
+		{
+			return query(conn, sql, params);
 		}
-		return results;
 	}
 
 	public static List<Map<String, Object>> query(Connection connection, String sql, List<Object> parameters)
@@ -132,7 +117,36 @@ public class DbUtils {
 		}
 		return results;
 	}
+	
+	public static List<Map<String, Object>> map(ResultSet rs) throws SQLException {
+		List<Map<String, Object>> results = new ArrayList<Map<String, Object>>();
+		try {
+			if (rs != null) {
+				ResultSetMetaData meta = rs.getMetaData();
+				int numColumns = meta.getColumnCount();
+				while (rs.next()) {
+					Map<String, Object> row = new HashMap<String, Object>();
+					for (int i = 1; i <= numColumns; ++i) {
+						String name = meta.getColumnName(i);
+						Object value = rs.getObject(i);
+						row.put(name, value);
+					}
+					results.add(row);
+				}
+			}
+		} finally {
+			close(rs);
+		}
+		return results;
+	}
 
+	public static int update(String sql, List<Object> params) throws SQLException {
+		try (Connection conn = getConnection())
+		{
+			return update(conn, sql, params);
+		}
+	}
+	
 	public static int update(Connection connection, String sql, List<Object> parameters) throws SQLException {
 		int numRowsUpdated = 0;
 		PreparedStatement ps = null;

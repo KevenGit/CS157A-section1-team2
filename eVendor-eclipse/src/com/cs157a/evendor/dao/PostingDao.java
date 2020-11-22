@@ -1,6 +1,5 @@
 package com.cs157a.evendor.dao;
 
-import java.sql.Connection;
 import java.util.*;
 
 import com.cs157a.evendor.model.*;
@@ -13,12 +12,10 @@ public class PostingDao {
 	public static List<Posting> selectByCategory(String category) {
 		List<Posting> result = new ArrayList<>();
 		
-		try (Connection conn = DbUtils.getConnection()) {
+		try {
 			
-			List<Object> params = new ArrayList<>();
-			params.add(category);
-			
-			List<Map<String, Object>> rs = DbUtils.query(conn, SELECT_CATEGORY_SQL, params);
+			List<Object> params = Arrays.asList(category);
+			List<Map<String, Object>> rs = DbUtils.query(SELECT_CATEGORY_SQL, params);
 			
 			for (Map<String, Object> t : rs) {
 				Posting p = new Posting((Integer) t.get("id"),
