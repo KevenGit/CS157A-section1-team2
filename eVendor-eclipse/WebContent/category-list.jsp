@@ -48,7 +48,7 @@
     	out.println("<tbody>");
         for (Posting p : postings) {
         	out.println("<tr>");
-        	out.println("<td>" + p.getTitle() + "</td>");
+        	out.println("<td><a href=\"SuiteServlet?id=" + p.getId() + "\">" + p.getTitle() + "</a></td>");
         	out.println("<td>" + p.getPrice() + "</td>");
         	out.println("<td>" + p.getRegion() + "</td>");
         	out.println("</tr>");

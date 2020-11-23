@@ -7,7 +7,28 @@ import com.cs157a.evendor.util.DbUtils;
 
 public class PostingDao {
 	
+	private static final String SELECT_ID_SQL = "SELECT * FROM postings WHERE id = ?";
 	private static final String SELECT_CATEGORY_SQL = "SELECT * FROM postings WHERE category = ?";
+	
+	public static Posting selectById(int id) {
+		Posting result = null;
+		
+		try {
+			
+			List<Object> params = Arrays.asList(id);
+			Map<String, Object> tuple = DbUtils.query(SELECT_ID_SQL, params).get(0);
+			
+			result = new Posting((Integer) tuple.get("id"),
+								(String) tuple.get("title"),
+								(String) tuple.get("category"),
+								(Double) tuple.get("price"),
+								(String) tuple.get("region"));
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 	
 	public static List<Posting> selectByCategory(String category) {
 		List<Posting> result = new ArrayList<>();
