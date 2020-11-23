@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@ page import="java.sql.*" %>
 <%@ page import="java.util.*" %>
+<%@ page import="com.cs157a.evendor.model.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,7 +37,7 @@
 		
 		out.println("<table class=\"cat-list-table\">");
 		
-		List<Map<String, Object>> result = (List) request.getAttribute("result");
+		List<Posting> postings = (List<Posting>) request.getAttribute("result");
 		
     	out.println("<thead>\n<tr>");
     	out.println("<th>Title</th>");
@@ -45,11 +46,11 @@
     	out.println("</tr>\n</thead>");
 		
     	out.println("<tbody>");
-        for (Map<String, Object> t : result) {
+        for (Posting p : postings) {
         	out.println("<tr>");
-        	out.println("<td>" + t.get("title") + "</td>");
-        	out.println("<td>" + t.get("price") + "</td>");
-        	out.println("<td>" + t.get("region") + "</td>");
+        	out.println("<td><a href=\"SuiteServlet?id=" + p.getId() + "\">" + p.getTitle() + "</a></td>");
+        	out.println("<td>" + p.getPrice() + "</td>");
+        	out.println("<td>" + p.getRegion() + "</td>");
         	out.println("</tr>");
         }
         

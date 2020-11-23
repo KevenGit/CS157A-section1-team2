@@ -8,10 +8,10 @@ public class User {
 	private String firstName;
 	private String lastName;
 	private String email;
-	long balance;
+	private double balance;
 	
 	public User(long id, String username, String hashedPassword, String pwsalt, String firstName, 
-			String lastName, String email, long balance) {
+			String lastName, String email, double balance) {
 		this.id = id;
 		this.username = username;
 		this.hashedPassword = hashedPassword;
@@ -44,7 +44,39 @@ public class User {
 	public String getEmail() {
 		return email;
 	}
-	public long getBalance() {
+	public double getBalance() {
 		return balance;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public void setHashedPassword(String hashedPassword) {
+		this.hashedPassword = hashedPassword;
+	}
+
+	public void setPwsalt(String pwsalt) {
+		this.pwsalt = pwsalt;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setBalance(double balance) {
+		this.balance = balance;
 	}
 }
