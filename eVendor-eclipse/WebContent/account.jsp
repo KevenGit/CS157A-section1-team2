@@ -1,3 +1,20 @@
+<%
+	String status = request.getParameter("status");
+	String msg = "";
+	if (status != null) {
+	     msg = "<p align=\"center\">" + status +"</p><br>";
+	}
+    // Check if user logged in (username and accountId should be set after logging in.
+    String username = (String) session.getAttribute("username");     //username is in fact the account email
+    long userId = (Long) session.getAttribute("userId");   //the account id
+    String loginLink = "<a href=\"logout.jsp\">Logout</a>";
+    if (username == null) {
+        loginLink = "<a href=\"account.jsp\">Login</a>";
+    } else {
+        response.sendRedirect("index.jsp");
+    }
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,12 +31,11 @@
 		</div>
 		<nav>
 			<ul>
-				<li><a href="index.html">Home</a></li>
+				<li><a href="index.jsp">Home</a></li>
 				<li><a href="category.html">Category</a></li>
-				<li><a href="">About</a></li>
 				<li><a href="posting.jsp">Post</a></li>
-				<li><a href="account.html">Login</a></li>
-				
+				<li><a href="userAccount.jsp">Account</a></li>
+				<li><%=loginLink%></li>
 			</ul>
 		</nav>
 	</div>
@@ -28,6 +44,7 @@
 	</div> 
 	
 	<!-- account page -->
+<%=msg%>
 	<div class="account-page">
 		<div class="form-container">
 			<div class="form-btn">
@@ -45,6 +62,8 @@
 						
 			<form id="RegForm" action = "register.jsp" method = "post">
 				<input type="text" placeholder="Username" name = "regis_username">
+				<input type="text" placeholder="First Name" name = "regis_first_name"> 
+				<input type="text" placeholder="Last Name" name = "regis_last_name"> 
 				<input type="email" placeholder="Email" name = "regis_email">
 				<input type="password" placeholder="Password" name = "regis_password">
 				<button type="submit" class="btn">Register</button>

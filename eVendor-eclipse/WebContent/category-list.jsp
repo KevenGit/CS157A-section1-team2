@@ -2,6 +2,17 @@
     pageEncoding="ISO-8859-1"%>
 <%@ page import="java.sql.*" %>
 <%@ page import="java.util.*" %>
+
+<%  // Check if user logged in (username and accountId should be set after logging in.
+    String username = (String) session.getAttribute("username");     //username is in fact the account email
+    String accountId = (String) session.getAttribute("userId");   //the account id
+    String loginLink = "<a href=\"logout.jsp\">Logout</a>";
+    if (username == null) {
+        loginLink = "<a href=\"account.jsp\">Login</a>";
+    }
+%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,11 +29,11 @@
 		</div>
 		<nav>
 			<ul>
-				<li><a href="index.html">Home</a></li>
+				<li><a href="index.jsp">Home</a></li>
 				<li><a href="category.html">Category</a></li>
-				<li><a href="">About</a></li>
+				<li><a href ="userAccount.jsp">Account</a></li>
 				<li><a href="posting.jsp">Post</a></li>
-				<li><a href="account.html">Login</a></li>
+				<li><%=loginLink%></li>
 				
 			</ul>
 		</nav>
