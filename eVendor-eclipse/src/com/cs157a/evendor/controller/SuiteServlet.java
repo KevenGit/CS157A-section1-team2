@@ -23,6 +23,7 @@ public class SuiteServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("submit");
+		if (action == null) action = "";
 		
 		switch (action) {
 		case "create":
@@ -42,7 +43,7 @@ public class SuiteServlet extends HttpServlet {
 	}
 	
 	private void display(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int postingId = Integer.parseInt(request.getParameter("id").trim().toLowerCase());
+		int postingId = Integer.parseInt(request.getParameter("post-id").trim().toLowerCase());
 		List<Suite> suites = SuiteDao.selectPostingsSuites(postingId);
 		Posting posting = PostingDao.selectById(postingId);
 		Seller seller = SellerDao.getSellerByPosting(postingId);
@@ -51,7 +52,7 @@ public class SuiteServlet extends HttpServlet {
 		request.setAttribute("posting", posting);
 		request.setAttribute("seller", seller);
 		
-		RequestDispatcher dispatch = request.getRequestDispatcher("posting-page.jsp");
+		RequestDispatcher dispatch = request.getRequestDispatcher("viewPosting.jsp");
 		dispatch.forward(request, response);
 	}
 	
@@ -59,21 +60,21 @@ public class SuiteServlet extends HttpServlet {
 		String h = request.getParameter("heading");
 		String p = request.getParameter("paragraph");
 		String i = request.getParameter("imgPath");
-		int postId = Integer.parseInt(request.getParameter("id"));
+		int postId = Integer.parseInt(request.getParameter("post-id"));
 		int index = Integer.parseInt(request.getParameter("index"));
 		
 		SuiteDao.createSuite(h, p, i, postId, index);
 		
-		RequestDispatcher dispatch = request.getRequestDispatcher("posting-page.jsp");
+		RequestDispatcher dispatch = request.getRequestDispatcher("viewPosting.jsp");
 		dispatch.forward(request, response);
 	}
 	
 	private void deleteSuite(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int suiteId = Integer.parseInt(request.getParameter("id"));
+		int suiteId = Integer.parseInt(request.getParameter("post-id"));
 		
 		SuiteDao.deleteSuite(suiteId);
 		
-		RequestDispatcher dispatch = request.getRequestDispatcher("posting-page.jsp");
+		RequestDispatcher dispatch = request.getRequestDispatcher("viewPosting.jsp");
 		dispatch.forward(request, response);
 	}
 }

@@ -79,17 +79,16 @@ public class PostingServlet extends HttpServlet {
 		String category = request.getParameter("category");
 		String region = request.getParameter("region");
 		double price = Double.parseDouble(request.getParameter("price"));
-		
-		int sellerId = 0;
+		int sellerId = Integer.parseInt(request.getParameter("seller-id"));
 		
 		int postingId = PostingDao.insertPosting(title, price, category, region, sellerId);
-		request.setAttribute("id", postingId);
+		request.setAttribute("post-id", postingId);
 		
-		getServletContext().getRequestDispatcher("/page?id=" + postingId).forward(request, response);
+		getServletContext().getRequestDispatcher("/page?post-id=" + postingId).forward(request, response);
 	}
 	
 	private void deletePosting(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int postId = Integer.parseInt(request.getParameter("id"));
+		int postId = Integer.parseInt(request.getParameter("post-id"));
 		PostingDao.deletePosting(postId);
 		
 		RequestDispatcher dispatch = request.getRequestDispatcher("index.jsp");

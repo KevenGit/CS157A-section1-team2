@@ -132,4 +132,26 @@ public class PostingDao {
 			e.printStackTrace();
 		}
 	}
+	
+	public static void addFavorite(int userId, int postId) {
+		String sql = "INSERT INTO favorites (user_id, post_id) VALUES (?, ?)";
+		List<Object> params = Arrays.asList(userId, postId);
+		
+		try {
+			DbUtils.update(sql, params);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void addFlag(int userId, int postId) {
+		String sql = "INSERT INTO flag (user_id, post_id) VALUES (?, ?)";
+		List<Object> params = Arrays.asList(userId, postId);
+		
+		try {
+			DbUtils.update(sql, params);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }
