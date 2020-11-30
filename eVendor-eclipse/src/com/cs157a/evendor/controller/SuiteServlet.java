@@ -22,7 +22,26 @@ public class SuiteServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String action = request.getParameter("submit");
 		
+		switch (action) {
+		case "create":
+			this.createSuite(request, response);
+			break;
+		case "delete":
+			this.deleteSuite(request, response);
+			break;
+		default:
+			display(request, response);
+			break;
+		}
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+	
+	private void display(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int postingId = Integer.parseInt(request.getParameter("id").trim().toLowerCase());
 		List<Suite> suites = SuiteDao.selectPostingsSuites(postingId);
 		Posting posting = PostingDao.selectById(postingId);
@@ -35,9 +54,26 @@ public class SuiteServlet extends HttpServlet {
 		RequestDispatcher dispatch = request.getRequestDispatcher("posting-page.jsp");
 		dispatch.forward(request, response);
 	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+	
+	private void createSuite(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String h = request.getParameter("heading");
+		String p = request.getParameter("paragraph");
+		String i = request.getParameter("imgPath");
+		int postId = Integer.parseInt(request.getParameter("id"));
+		int index = Integer.parseInt(request.getParameter("index"));
+		
+		SuiteDao.createSuite(h, p, i, postId, index);
+		
+		RequestDispatcher dispatch = request.getRequestDispatcher("posting-page.jsp");
+		dispatch.forward(request, response);
 	}
-
+	
+	private void deleteSuite(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int suiteId = Integer.parseInt(request.getParameter("id"));
+		
+		SuiteDao.deleteSuite(suiteId);
+		
+		RequestDispatcher dispatch = request.getRequestDispatcher("posting-page.jsp");
+		dispatch.forward(request, response);
+	}
 }
