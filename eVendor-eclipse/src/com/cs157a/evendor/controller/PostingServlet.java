@@ -22,19 +22,21 @@ public class PostingServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String action = request.getContextPath();
+		String action = request.getParameter("submit");
 		
 		switch (action) {
-		case "/postings/categories":
-			displayCategoryList(request, response);
-			break;
-		case "/postings/search":
+		case "search":
 			displaySearchResults(request, response);
 			break;
+		case "create":
+			createPosting(request, response);
+			break;
+		case "delete":
+			deletePosting(request, response);
+			break;
 		default:
-			response.getWriter().append("Error");
+			displayCategoryList(request, response);
 		}
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -69,6 +71,28 @@ public class PostingServlet extends HttpServlet {
 		request.setAttribute("result", result);
 		
 		RequestDispatcher dispatch = request.getRequestDispatcher("search-form.jsp");
+		dispatch.forward(request, response);
+	}
+	
+	private void createPosting(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String title = request.getParameter("title");
+		String category = request.getParameter("category");
+		String region = request.getParameter("region");
+		double price = Double.parseDouble(request.getParameter("price"));
+		
+		int sellerId = 0;
+		
+		int postingId = PostingDao.insertPosting(title, price, category, region, sellerId);
+		request.setAttribute("id", postingId);
+		
+		getServletContext().getRequestDispatcher("/page?id=" + postingId).forward(request, response);
+	}
+	
+	private void deletePosting(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int postId = Integer.parseInt(request.getParameter("id"));
+		PostingDao.deletePosting(postId);
+		
+		RequestDispatcher dispatch = request.getRequestDispatcher("index.jsp");
 		dispatch.forward(request, response);
 	}
 }

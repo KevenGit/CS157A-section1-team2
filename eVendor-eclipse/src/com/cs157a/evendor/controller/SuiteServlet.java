@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.cs157a.evendor.dao.*;
 import com.cs157a.evendor.model.*;
 
-@WebServlet("/SuiteServlet")
+@WebServlet("/page")
 public class SuiteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

@@ -9,14 +9,15 @@
 <meta charset="ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>eVendor Search</title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="css/search-style.css">
+<script src="js/selector.js"></script>
 </head>
 <body>
 	<div class="search-form-wrapper">
 		<h1>Search For Postings</h1>
-		<form id="search-form" action="/postings/search" method="POST">
+		<form id="search-form" action="postings" method="POST">
 			<input type="text" name="search" placeholder="Search ...">
-			<button type="submit" name="submit">Search</button>
+			<button type="submit" name="submit" value="search">Search</button>
 
 			<br>
 
@@ -27,6 +28,11 @@
 					<option value="None">Select a Region</option>
 				</select> Price <select name="price" id="price">
 					<option value="Any">Price Range</option>
+					<option value="0.0-9.99">$0 - $10</option>
+					<option value="10.0-29.99">$10 - $30</option>
+					<option value="30.0-59.99">$30 - $60</option>
+					<option value="60.0-99.99">$60 - $100</option>
+					<option value="100.0-10000.00">$100 and over</option>
 				</select>
 			</div>
 		</form>
@@ -48,7 +54,7 @@
 		        for (Posting p : postings) {
 		        	out.println("<tr>");
 		        	out.println("<td>" + p.getRegion() + "</td>");
-		        	out.println("<td><a href=\"SuiteServlet?id=" + p.getId() + "\">" + p.getTitle() + "</a></td>");
+		        	out.println("<td><a href=\"page?id=" + p.getId() + "\">" + p.getTitle() + "</a></td>");
 		        	out.println("<td>" + p.getPrice() + "</td>");
 		        	out.println("</tr>");
 		        }

@@ -1,5 +1,6 @@
 package com.cs157a.evendor.dao;
 
+import java.sql.SQLException;
 import java.util.*;
 
 import com.cs157a.evendor.model.*;
@@ -11,7 +12,11 @@ public class PostingDao {
 	private static final String SELECT_CATEGORY_SQL = "SELECT * FROM postings WHERE category = ?";
 	private static final String SEARCH_SQL = "SELECT * FROM " +
 											"(SELECT * FROM postings " + 
-											"WHERE category LIKE ? AND region LIKE ? AND price >= ? AND price <= ?)";
+											"WHERE category LIKE ? AND region LIKE ? AND price >= ? AND price <= ?)R";
+	private static final String INSERT_POSTING_SQL = "INSERT INTO postings (title, price, category, region) values (?, ?, ?, ?)";
+	private static final String GET_ID_SQL = "SELECT id FROM postings " + 
+										"WHERE title = ? AND price = ? AND category = ? AND region = ?";
+	private static final String INSERT_POST_SQL = "INSERT INTO post (seller_id, post_id) values (?, ?)";
 	
 	public static Posting selectById(int id) {
 		Posting result = null;
@@ -65,9 +70,9 @@ public class PostingDao {
 		
 		for (int i = 0; i < search.length; i++) {
 			if (i == 0)
-				sql += " WHERE title LIKE" + search[i];
+				sql += " WHERE title LIKE \'%" + search[i] + "%\'";
 			else
-				sql += " AND title LIKE" + search[i];
+				sql += " AND title LIKE \'%" + search[i] + "%\'";
 		}
 		
 		try {
@@ -88,5 +93,43 @@ public class PostingDao {
 			e.printStackTrace();
 		}
 		return result;
+	}
+	
+	public static int insertPosting(String title, double price, String category, String region, int sellerId) {
+		List<Object> params = Arrays.asList(title, price, category, region);
+		int postingId = 0;
+		
+		try {
+			DbUtils.update(INSERT_POSTING_SQL, params);
+			List<Map<String, Object>> rs = DbUtils.query(GET_ID_SQL, params);
+			postingId = (Integer) rs.get(0).get("id");
+			
+			params = Arrays.asList(sellerId, postingId);
+			DbUtils.update(INSERT_POST_SQL, params);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return postingId;
+	}
+	
+	public static void deletePosting(int postId) {
+		String sqls[] = new String[5];
+		sqls[0] = "DELETE FROM postings WHERE id = ?";
+		sqls[1] = "DELETE FROM post WHERE post_id = ?";
+		sqls[2] = "DELETE FROM favorites WHERE post_id = ?";
+		sqls[3] = "DELETE FROM flag WHERE post_id = ?";
+		sqls[4] = "DELETE FROM suite WHERE post_id = ?";
+		
+		List<Object> params = Arrays.asList(postId);
+		
+		try {
+			for (String s : sqls) {
+				DbUtils.update(s, params);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }
