@@ -5,12 +5,14 @@ public class Suite {
 	private String heading;
 	private String paragraph;
 	private String imgPath;
+	private int index;
 	
-	public Suite(int id, String heading, String paragraph, String imgPath) {
+	public Suite(int id, String heading, String paragraph, String imgPath, int index) {
 		this.id = id;
 		this.heading = heading;
 		this.paragraph = paragraph;
 		this.imgPath = imgPath;
+		this.index = index;
 	}
 
 	public int getId() {
@@ -27,6 +29,10 @@ public class Suite {
 
 	public String getImgPath() {
 		return imgPath;
+	}
+	
+	public int getIndex() {
+		return index;
 	}
 
 	public void setId(int id) {
@@ -45,4 +51,7 @@ public class Suite {
 		this.imgPath = imgPath;
 	}
 	
+	public void setIndex(int index) {
+		this.index = index;
+	}
 }

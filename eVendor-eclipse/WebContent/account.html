@@ -6,54 +6,57 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-	<div class="header">	
-	<div class="container">
-	<div class = "navbar"> 
-		<div class = "logo">
-		<img src="images/logo.png" width="125px">		
+	<div class="header">
+		<div class="container">
+			<div class="navbar">
+				<div class="logo">
+					<img src="images/logo.png" width="125px">
+				</div>
+				<nav>
+					<ul>
+						<li><a href="index.html">Home</a></li>
+						<li><a href="category.html">Category</a></li>
+						<li><a href="">About</a></li>
+						<li><a href="posting.jsp">Post</a></li>
+						<li><a href="account.html">Login</a></li>
+
+					</ul>
+				</nav>
+			</div>
+
 		</div>
-		<nav>
-			<ul>
-				<li><a href="index.html">Home</a></li>
-				<li><a href="category.html">Category</a></li>
-				<li><a href="">About</a></li>
-				<li><a href="posting.jsp">Post</a></li>
-				<li><a href="account.html">Login</a></li>
-				
-			</ul>
-		</nav>
 	</div>
 
-	</div>
-	</div> 
-	
 	<!-- account page -->
 	<div class="account-page">
 		<div class="form-container">
 			<div class="form-btn">
-				<span onclick="login()">Login</span>
-				<span onclick="register()">Register</span>
+				<span onclick="login()">Login</span> <span onclick="register()">Register</span>
 				<hr id="formIndicator">
 			</div>
-			
-			<form id="LoginForm" action = "login.jsp" method = "post">
-				<input type="text" placeholder="Username" name = "login_username">
-				<input type="password" placeholder="Password" name = "login_password">
-				<button type="submit" class="btn" >Login</button>
+
+			<form id="LoginForm" action="" method="post">
+				<input type="text" placeholder="Username"> <input
+					type="password" placeholder="Password">
+				<button type="submit" class="btn">Login</button>
 				<a href="">Forget password</a>
 			</form>
-						
-			<form id="RegForm" action = "register.jsp" method = "post">
-				<input type="text" placeholder="Username" name = "regis_username">
-				<input type="email" placeholder="Email" name = "regis_email">
-				<input type="password" placeholder="Password" name = "regis_password">
+
+			<form id="RegForm" action="register.jsp" method="post">
+				<input type="text" placeholder="Username"> 
+				<input type="text" placeholder="First Name"> 
+				<input type="text" placeholder="Last Name"> 
+				<input type="text" placeholder="Phone Number"> 
+				<input
+					type="email" placeholder="Email"> <input type="password"
+					placeholder="Password">
 				<button type="submit" class="btn">Register</button>
-				
+
 			</form>
-		</div>					
+		</div>
 	</div>
-	
-	
+
+
 	<!-- js for account login/register -->
 	<script>
 	var loginForm = document.getElementById("LoginForm");
@@ -72,15 +75,6 @@
 			indicator.style.transform="translateX(0px)";
 		}
 	</script>
-	
-	
-	
-	
-	
-	
-	
-	
-
 
 </body>
 </html>
