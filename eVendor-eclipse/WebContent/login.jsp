@@ -6,6 +6,7 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.cs157a.evendor.model.*"%>
 <%@ page import="com.cs157a.evendor.util.*"%>
+<%@ page import="com.cs157a.evendor.dao.*"%>
 <%!
     public boolean validate(String username, String password, User user) {
 		if(user != null){
@@ -35,6 +36,12 @@
         session.setAttribute("first_name", user.getFirstName());
         session.setAttribute("last_name", user.getLastName());
         session.setAttribute("email", user.getEmail());
+        
+        // Set phone to see if Seller
+        String phone = SellerDao.getSellerPhone(user);
+        if (phone != null)
+        	session.setAttribute("phone", phone);
+        
         // Redirect to the previous page: TBD
         msg = "Logged in successful";
         response.sendRedirect("index.jsp");

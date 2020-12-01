@@ -14,9 +14,16 @@
     String userFirstName = (String) session.getAttribute("first_name");
     String userLastName = (String) session.getAttribute("last_name");
     String userEmail = (String) session.getAttribute("email");
+    String phone = (String) session.getAttribute("phone");
+    
     String loginLink = "<a href=\"logout.jsp\">Logout</a>";
+    String postLink = "<a href=\"createPosting.jsp\">Post</a>";
     if (username == null) {
     	response.sendRedirect("account.jsp");
+    }
+    
+    if (phone == null) {
+    	postLink = "<a href=\"account.jsp\">Post</a>";
     }
 %>
 
@@ -90,6 +97,8 @@
 <title>User Account</title>
 </head>
 <body>
+
+	<!-- Header -->
 	<div class="header">	
 	<div class="container">
 	<div class = "navbar"> 
@@ -99,19 +108,13 @@
 		<nav>
 			<ul>
 				<li><a href="index.jsp">Home</a></li>
-				<li><a href="category.html">Category</a></li>
-				<li><a href="posting.jsp">Post</a></li>
+				<li><a href="search-form.jsp">Search</a></li>
+				<li><%=postLink %></li>
 				<li><a href="userAccount.jsp">Account</a></li>
-				<li><%=loginLink%></li>
-				
+				<li><%=loginLink%></li>	
 			</ul>
 		</nav>
-	</div>
-
-	</div>
-	</div>
-	
-	
+	</div></div></div>
 	
 	<!-- We can assume that the user is logged in, first display a table of their basic info-->
 	<table width="100%">
@@ -125,5 +128,3 @@
 	<%=result.toString()%>
 </body>
 </html>
-
-

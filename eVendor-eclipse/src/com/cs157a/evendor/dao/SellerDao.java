@@ -28,5 +28,23 @@ public class SellerDao {
 		}
 		return seller;
 	}
-
+	
+	public static String getSellerPhone(User user) {
+		String sql = "SELECT phone FROM seller WHERE id = ?";
+		String phone = null;
+		
+		try {
+			List<Object> params = Arrays.asList(user.getId());
+			List<Map<String, Object>> rs = DbUtils.query(sql, params);
+			
+			for (Map<String, Object> t : rs) {
+				phone = (String) t.get("phone");
+			}
+			
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return phone;
+	}
 }

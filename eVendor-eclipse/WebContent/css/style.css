@@ -237,3 +237,68 @@ form a {
 .cat-list-table td {
     padding: 12px 15px;
 }
+
+/* Search Form CSS*/
+.search-form-wrapper {
+    width: 1000px;
+    margin: 0 auto;
+}
+
+#search-form {
+    padding-bottom: 1rem;
+    background-color: #ccc;
+}
+
+#search-form input {
+    width: 90%;
+    height: 25px;
+    margin: 1rem auto;
+    padding: 0 10px;
+    border: 1px solid;
+    font-size: 1rem;
+}
+
+#search-form button {
+    width: auto;
+    height: 30px;
+    font-size: 1rem;
+    font-weight: 100;
+}
+
+.selector-wrapper {
+    width: 100%;
+    margin: 10px auto;
+    font-size: large;
+    font-weight: bolder;
+}
+
+.selector-wrapper select {
+    width: 200px;
+    height: 20px;
+    margin: 0 10px;
+}
+
+.search-result-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+}
+
+.search-result-table thead tr {
+    background-color: #ccc;
+    text-align: left;
+}
+
+.search-result-table tbody tr {
+    border-bottom: 1px solid #000000;
+    background-color: #f3f3f3;
+}
+
+.search-result-table th,
+.search-result-table td {
+    padding: 12px 15px;
+}
+
+.search-result-table tbody tr td img {
+    width: 100px;
+}

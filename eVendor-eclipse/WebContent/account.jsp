@@ -4,14 +4,23 @@
 	if (status != null) {
 	     msg = "<p align=\"center\">" + status +"</p><br>";
 	}
-    // Check if user logged in (username and accountId should be set after logging in.
-    String username = (String) session.getAttribute("username");     //username is in fact the account email
+%>
+
+<%  // Check if user logged in (username and accountId should be set after logging in.
+    // If user is Seller, phone is set
+    String username = (String) session.getAttribute("username");
     long userId = (Long) session.getAttribute("userId");   //the account id
+    String phone = (String) session.getAttribute("phone");
     String loginLink = "<a href=\"logout.jsp\">Logout</a>";
+    String postLink = "<a href=\"createPosting.jsp\">Post</a>";
     if (username == null) {
         loginLink = "<a href=\"account.jsp\">Login</a>";
     } else {
         response.sendRedirect("index.jsp");
+    }
+    
+    if (phone == null) {
+    	postLink = "<a href=\"account.jsp\">Post</a>";
     }
 %>
 
@@ -23,6 +32,8 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
+	<!-- Header -->
 	<div class="header">	
 	<div class="container">
 	<div class = "navbar"> 
@@ -32,16 +43,13 @@
 		<nav>
 			<ul>
 				<li><a href="index.jsp">Home</a></li>
-				<li><a href="category.html">Category</a></li>
-				<li><a href="posting.jsp">Post</a></li>
+				<li><a href="search-form.jsp">Search</a></li>
+				<li><%=postLink %></li>
 				<li><a href="userAccount.jsp">Account</a></li>
-				<li><%=loginLink%></li>
+				<li><%=loginLink%></li>	
 			</ul>
 		</nav>
-	</div>
-
-	</div>
-	</div> 
+	</div></div></div>
 	
 	<!-- account page -->
 <%=msg%>
