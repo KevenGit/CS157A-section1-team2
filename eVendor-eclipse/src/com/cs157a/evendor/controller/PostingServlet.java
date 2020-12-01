@@ -31,6 +31,9 @@ public class PostingServlet extends HttpServlet {
 		case "create-posting":
 			createPosting(request, response);
 			break;
+		case "favorite":
+			addFavorite(request, response);
+			break;
 		case "delete-posting":
 			deletePosting(request, response);
 			break;
@@ -51,6 +54,15 @@ public class PostingServlet extends HttpServlet {
 		
 		RequestDispatcher dispatch = request.getRequestDispatcher("category-list.jsp");
 		dispatch.forward(request, response);
+	}
+	
+	private void addFavorite(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int postId = Integer.parseInt(request.getParameter("post-id"));
+		int userId = Integer.parseInt(request.getParameter("user-id"));
+		
+		PostingDao.addFavorite(userId, postId);
+		
+		response.sendRedirect("userAccount.jsp");
 	}
 	
 	private void displaySearchResults(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

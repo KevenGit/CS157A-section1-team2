@@ -68,23 +68,23 @@
 			</div>
 			
             <div class="buttons">
-            	<form action="#" method="POST">
+            	<form action="order" method="POST">
                     <input type="hidden" name="post-id" value=<%= posting.getId() %>>
                     <input type="hidden" name="user-id" value=<%= Math.toIntExact(userId) %>>
                     <input type="hidden" name="seller-id" value=<%= Math.toIntExact(seller.getId()) %>>
                     <%
                     	if (loggedIn)
-                    		out.println("<button type=\"submit\" name=\"action\" value=\"purchase\">"
+                    		out.println("<button type=\"submit\" name=\"action\" value=\"order\">"
                     					+ "$" + posting.getPrice() + "</button>");
                     %>
                 </form>
             	
-                <form action="#" method="POST">
+                <form action="postings" method="POST">
                     <input type="hidden" name="post-id" value=<%= posting.getId() %>>
                     <input type="hidden" name="user-id" value=<%= Math.toIntExact(userId) %>>
                     <%
                     	if (loggedIn)
-                    		out.println("<button type=\"submit\" name=\"action\" value=\"favorite\">"
+                    		out.println("<button type=\"submit\" name=\"submit\" value=\"favorite\">"
                     					+ "Favorite</button>");
                     %>
                 </form>
