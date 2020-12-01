@@ -1,5 +1,7 @@
 package com.cs157a.evendor.util;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -9,8 +11,31 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 public class Utils {
+	
+	public static String getUploadDir() throws IOException {
+		String upload_dir = "";
+		
+		try(InputStream is = DbUtils.class.getClassLoader().getResourceAsStream("/e_vendor_data_test.properties")) {
+			Properties prop = new Properties();
+			prop.load(is);
+			upload_dir = prop.getProperty("upload_dir");
+		}
+		return upload_dir;
+	}
+	
+	public static String getImageDir() throws IOException {
+		String image_dir = "";
+		
+		try(InputStream is = DbUtils.class.getClassLoader().getResourceAsStream("/e_vendor_data_test.properties")) {
+			Properties prop = new Properties();
+			prop.load(is);
+			image_dir = prop.getProperty("image_dir");
+		}
+		return image_dir + "/";
+	}
 	
 	public static StringBuffer printHtmlTable(Connection conn, String table) {
 		StringBuffer result = new StringBuffer();

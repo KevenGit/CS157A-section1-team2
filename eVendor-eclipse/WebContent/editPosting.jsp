@@ -3,6 +3,7 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="java.util.*" %>
 <%@ page import="com.cs157a.evendor.model.*" %>
+<%@ page import="com.cs157a.evendor.util.*" %>
 
 <%  // Check if user logged in (username and accountId should be set after logging in.
     // If user is Seller, phone is set
@@ -75,7 +76,7 @@
             		"<button type=\"submit\" name=\"action\" value=\"delete-suite\">Delete</button>\n" +
         		"</form>");
 			out.println("<h1>" + s.getHeading() + "</h1>");
-			out.println("<img src=\"" + s.getImgPath() + "\">");
+			out.println("<img src=\"" + Utils.getImageDir() + s.getImgPath() + "\">");
 			out.println("<p>" + s.getParagraph() + "</p>");
 			out.println("</div>");
 			index = s.getIndex();
@@ -84,9 +85,9 @@
 	
 		<div class="form">
             <h3>Create a New Suite</h3>
-            <form id="suite-form" action="#" method="POST" enctype="multipart/form-data">
+            <form id="suite-form" action="upload" method="POST" enctype="multipart/form-data">
                 Heading <br>
-                <input type="text" name="title" placeholder="New Heading...">
+                <input type="text" name="heading" placeholder="New Heading...">
     
                 <br> Img <br>
                 <input type="file" name="file">
@@ -96,7 +97,7 @@
 
                 <input type="hidden" name="index" value=<%= index + 1 %>>
                 <input type="hidden" name="post-id" value=<%= posting.getId() %>>
-                <button type="submit" name="submit" value="create">Create</button>
+                <button type="submit" name="action" value="create-suite">Create</button>
             </form>
         </div>
 	</div>	

@@ -56,7 +56,7 @@ p {
 }
 
 .row {
-	background-image: url("images/blueCart.jpg");
+	background-image: url("../images/blueCart.jpg");
 	background-color: #cccccc;
 	height: 500px;
 	background-position: center;
@@ -81,7 +81,7 @@ p {
 
 /* account design*/
 .account-page {
-	background-image: url("images/backgd.jpg");
+	background-image: url("../images/backgd.jpg");
 	height: 500px;
 	background-position: center;
 	background-repeat: no-repeat;

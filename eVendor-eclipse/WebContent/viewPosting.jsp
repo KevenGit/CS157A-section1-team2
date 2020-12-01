@@ -3,6 +3,7 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="java.util.*" %>
 <%@ page import="com.cs157a.evendor.model.*" %>
+<%@ page import="com.cs157a.evendor.util.*" %>
 
 <%  // Check if user logged in (username and accountId should be set after logging in.
     // If user is Seller, phone is set
@@ -74,7 +75,7 @@
                     <%
                     	if (loggedIn)
                     		out.println("<button type=\"submit\" name=\"action\" value=\"purchase\">"
-                    					+ posting.getPrice() + "</button>");
+                    					+ "$" + posting.getPrice() + "</button>");
                     %>
                 </form>
             	
@@ -93,7 +94,7 @@
 		for (Suite s : suites) {
 			out.println("<div class=\"viewPosting-suite\">");
 			out.println("<h1>" + s.getHeading() + "</h1>");
-			out.println("<img src=\"" + s.getImgPath() + "\">");
+			out.println("<img src=\"" + Utils.getImageDir() + s.getImgPath() + "\">");
 			out.println("<p>" + s.getParagraph() + "</p>");
 			out.println("</div>");
 		}

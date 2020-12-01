@@ -29,9 +29,6 @@ public class SuiteServlet extends HttpServlet {
 		if (action == null) action = "";
 		
 		switch (action) {
-		case "create-suite":
-			createSuite(request, response);
-			break;
 		case "delete-suite":
 			deleteSuite(request, response);
 			break;
@@ -49,7 +46,7 @@ public class SuiteServlet extends HttpServlet {
 	}
 	
 	private void display(HttpServletRequest request, HttpServletResponse response, String URI) throws ServletException, IOException {
-		int postingId = Integer.parseInt(request.getParameter("post-id").trim().toLowerCase());
+		int postingId = Integer.parseInt(request.getParameter("post-id"));
 		List<Suite> suites = SuiteDao.selectPostingsSuites(postingId);
 		Posting posting = PostingDao.selectById(postingId);
 		Seller seller = SellerDao.getSellerByPosting(postingId);
@@ -61,20 +58,7 @@ public class SuiteServlet extends HttpServlet {
 		RequestDispatcher dispatch = request.getRequestDispatcher(URI);
 		dispatch.forward(request, response);
 	}
-	
-	private void createSuite(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String h = request.getParameter("heading");
-		String p = request.getParameter("paragraph");
-		String i = request.getParameter("imgPath");
-		int postId = Integer.parseInt(request.getParameter("post-id"));
-		int index = Integer.parseInt(request.getParameter("index"));
 		
-		SuiteDao.createSuite(h, p, i, postId, index);
-		
-		RequestDispatcher dispatch = request.getRequestDispatcher("/page?action=edit-suite&post-id=" + postId);
-		dispatch.forward(request, response);
-	}
-	
 	private void deleteSuite(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int suiteId = Integer.parseInt(request.getParameter("suite-id"));
 		SuiteDao.deleteSuite(suiteId);
