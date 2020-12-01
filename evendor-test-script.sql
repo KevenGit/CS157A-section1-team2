@@ -5,8 +5,8 @@ USE e_vendor_data_test;
 CREATE TABLE user(
 	id INT NOT NULL AUTO_INCREMENT,
     username VARCHAR(64) NOT NULL UNIQUE,
-    hash_pw CHAR(32) NOT NULL UNIQUE,
-    pw_salt CHAR(16) NOT NULL,
+    hash_pw VARCHAR(256) NOT NULL UNIQUE,
+    pw_salt VARCHAR(256) NOT NULL,
     first_name VARCHAR(45) NOT NULL,
     last_name VARCHAR(45) NOT NULL,
     email VARCHAR(128) NOT NULL,
@@ -60,12 +60,14 @@ CREATE TABLE post(
 
 CREATE TABLE favorites(
 	user_id INT NOT NULL,
-    post_id INT NOT NULL
+    post_id INT NOT NULL,
+    primary key (user_id, post_id)
 );
 
 CREATE TABLE flag(
 	user_id INT NOT NULL,
-    post_id INT NOT NULL
+    post_id INT NOT NULL,
+    primary key (user_id, post_id)
 );
 
 CREATE TABLE orders(
