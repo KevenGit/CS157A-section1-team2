@@ -61,8 +61,8 @@
             String category = rs.getString(3);
             double price = rs.getDouble(4);
             String region = rs.getString(5);
-            String detailPage = "viewPosting.jsp?postId=" + id;
-            String editPage = "editPosting.jsp?postId=" + id;
+            String detailPage = "page?post-id=" + id;
+            String editPage = "page?post-id=" + id + "&action=edit-suite";
             String removePage = "removePosting.jsp?postId=" + id;
             
            

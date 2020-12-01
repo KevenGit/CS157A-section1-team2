@@ -25,13 +25,13 @@ public class PostingServlet extends HttpServlet {
 		String action = request.getParameter("submit");
 		
 		switch (action) {
-		case "search":
+		case "search-posting":
 			displaySearchResults(request, response);
 			break;
-		case "create":
+		case "create-posting":
 			createPosting(request, response);
 			break;
-		case "delete":
+		case "delete-posting":
 			deletePosting(request, response);
 			break;
 		default:

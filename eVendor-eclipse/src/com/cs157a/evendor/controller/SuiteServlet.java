@@ -25,18 +25,19 @@ public class SuiteServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String action = request.getParameter("submit");
+		String action = request.getParameter("action");
 		if (action == null) action = "";
 		
 		switch (action) {
-		case "create":
-			this.createSuite(request, response);
+		case "create-suite":
+			createSuite(request, response);
 			break;
-		case "delete":
-			this.deleteSuite(request, response);
+		case "delete-suite":
+			deleteSuite(request, response);
 			break;
-		case "edit":
+		case "edit-suite":
 			display(request, response, editURI);
+			break;
 		default:
 			display(request, response, viewURI);
 			break;

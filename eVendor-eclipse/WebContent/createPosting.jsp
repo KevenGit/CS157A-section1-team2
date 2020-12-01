@@ -17,6 +17,8 @@
     }
 %>
 
+<% request.setAttribute("sumbit", "create"); %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,8 +73,9 @@
 				<label for="price">Price</label><br> <input type="number"
 					name="price" id="price" min=0 step=0.01 required>
 			</div>
-
-			<button type="submit" name="submit" value="create">Create</button>
+			
+			<input type="hidden" name="seller-id" value=<%= Math.toIntExact(userId) %>>
+			<button type="submit" name="submit" value="create-posting">Create</button>
 		</form>
 	</div>
 </body>

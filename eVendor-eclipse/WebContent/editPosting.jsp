@@ -64,9 +64,9 @@
             </ul>
 
             <div class="buttons">
-                <form action="#" method="GET">
+                <form action="#" method="POST">
                     <input type="hidden" name="post-id" value=<%= posting.getId() %>>
-                    <input type="hidden" name="user-id" value=2>
+                    <input type="hidden" name="user-id" value=<%= Math.toIntExact(userId) %>>
                     <input type="submit" name="submit" value="flag">
                     <input type="submit" name="submit" value="favorite">
                 </form>
@@ -75,7 +75,7 @@
 	<%
 		for (Suite s : suites) {
             out.println(
-            	"<form action=\"#\" method=\"GET\">\n" +
+            	"<form action=\"#\" method=\"POST\">\n" +
            			"<input type=\"hidden\" name=\"suite-id\" value=" + s.getId() + ">\n" +
            			"<input type=\"hidden\" name=\"post-id\" value=" + posting.getId() + ">\n" +
             		"<input type=\"submit\" name=\"submit\" value=\"delete\">\n" +
@@ -91,7 +91,7 @@
 	
 		<div class="form">
             <h3>Create a New Suite</h3>
-            <form id="suite-form" action="#" method="GET" enctype="multipart/form-data">
+            <form id="suite-form" action="#" method="POST" enctype="multipart/form-data">
                 Heading <br>
                 <input type="text" name="title" placeholder="New Heading...">
     

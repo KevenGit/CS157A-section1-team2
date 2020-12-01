@@ -54,7 +54,7 @@
 		<h1>Search For Postings</h1>
 		<form id="search-form" action="postings" method="POST">
 			<input type="text" name="search" placeholder="Search ...">
-			<button type="submit" name="submit" value="search">Search</button>
+			<button type="submit" name="submit" value="search-posting">Search</button>
 
 			<br>
 
