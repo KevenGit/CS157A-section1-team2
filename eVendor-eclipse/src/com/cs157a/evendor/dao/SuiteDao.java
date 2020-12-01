@@ -25,7 +25,8 @@ public class SuiteDao {
 				Suite s = new Suite((Integer) t.get("id"),
 									(String) t.get("heading"),
 									(String) t.get("paragraph"),
-									(String) t.get("img_path"));
+									(String) t.get("img_path"),
+									(Integer) t.get("index_position"));
 				results.add(s);
 			}
 		}

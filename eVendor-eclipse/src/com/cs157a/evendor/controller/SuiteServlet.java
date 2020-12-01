@@ -16,6 +16,9 @@ import com.cs157a.evendor.model.*;
 @WebServlet("/page")
 public class SuiteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	private static final String viewURI = "viewPosting.jsp";
+	private static final String editURI = "editPosting.jsp";
        
     public SuiteServlet() {
         super();
@@ -32,8 +35,10 @@ public class SuiteServlet extends HttpServlet {
 		case "delete":
 			this.deleteSuite(request, response);
 			break;
+		case "edit":
+			display(request, response, editURI);
 		default:
-			display(request, response);
+			display(request, response, viewURI);
 			break;
 		}
 	}
@@ -42,7 +47,7 @@ public class SuiteServlet extends HttpServlet {
 		doGet(request, response);
 	}
 	
-	private void display(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void display(HttpServletRequest request, HttpServletResponse response, String URI) throws ServletException, IOException {
 		int postingId = Integer.parseInt(request.getParameter("post-id").trim().toLowerCase());
 		List<Suite> suites = SuiteDao.selectPostingsSuites(postingId);
 		Posting posting = PostingDao.selectById(postingId);
@@ -52,7 +57,7 @@ public class SuiteServlet extends HttpServlet {
 		request.setAttribute("posting", posting);
 		request.setAttribute("seller", seller);
 		
-		RequestDispatcher dispatch = request.getRequestDispatcher("viewPosting.jsp");
+		RequestDispatcher dispatch = request.getRequestDispatcher(URI);
 		dispatch.forward(request, response);
 	}
 	
@@ -65,16 +70,16 @@ public class SuiteServlet extends HttpServlet {
 		
 		SuiteDao.createSuite(h, p, i, postId, index);
 		
-		RequestDispatcher dispatch = request.getRequestDispatcher("viewPosting.jsp");
+		RequestDispatcher dispatch = request.getRequestDispatcher("/page?submit=edit&post-id=" + postId);
 		dispatch.forward(request, response);
 	}
 	
 	private void deleteSuite(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int suiteId = Integer.parseInt(request.getParameter("post-id"));
-		
+		int suiteId = Integer.parseInt(request.getParameter("suite-id"));
 		SuiteDao.deleteSuite(suiteId);
 		
-		RequestDispatcher dispatch = request.getRequestDispatcher("viewPosting.jsp");
+		int postId = Integer.parseInt(request.getParameter("post-id"));
+		RequestDispatcher dispatch = request.getRequestDispatcher("/page?submit=edit&post-id=" + postId);
 		dispatch.forward(request, response);
 	}
 }
