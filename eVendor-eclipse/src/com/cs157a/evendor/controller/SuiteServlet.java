@@ -71,7 +71,7 @@ public class SuiteServlet extends HttpServlet {
 		
 		SuiteDao.createSuite(h, p, i, postId, index);
 		
-		RequestDispatcher dispatch = request.getRequestDispatcher("/page?submit=edit&post-id=" + postId);
+		RequestDispatcher dispatch = request.getRequestDispatcher("/page?action=edit-suite&post-id=" + postId);
 		dispatch.forward(request, response);
 	}
 	
@@ -80,7 +80,7 @@ public class SuiteServlet extends HttpServlet {
 		SuiteDao.deleteSuite(suiteId);
 		
 		int postId = Integer.parseInt(request.getParameter("post-id"));
-		RequestDispatcher dispatch = request.getRequestDispatcher("/page?submit=edit&post-id=" + postId);
+		RequestDispatcher dispatch = request.getRequestDispatcher("/page?action=edit-suite&post-id=" + postId);
 		dispatch.forward(request, response);
 	}
 }

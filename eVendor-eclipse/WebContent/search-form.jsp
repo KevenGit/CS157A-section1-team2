@@ -59,11 +59,18 @@
 			<br>
 
 			<div class="selector-wrapper">
-				Category <select name="category" id="category">
+				<label for="category">Category</label> 
+				<select name="category" id="category">
 					<option value="None">Select a Category</option>
-				</select> Region <select name="region" id="region">
+				</select>
+				
+				<label for="region">Region</label>
+				<select name="region" id="region">
 					<option value="None">Select a Region</option>
-				</select> Price <select name="price" id="price">
+				</select>
+				
+				<label for="price">Price</label>
+				<select name="price" id="price">
 					<option value="Any">Price Range</option>
 					<option value="0.0-9.99">$0 - $10</option>
 					<option value="10.0-29.99">$10 - $30</option>
@@ -81,8 +88,8 @@
 			if (postings != null) {
 				out.println("<thead>\n" +
 							"<tr>\n" +
-							"<th>Thumbnail</th>\n" +
 							"<th>Title</th>\n" +
+							"<th>Region</th>\n" +
 							"<th>Price</th>\n" +
 							"</tr>\n" +
 							"</thead>");
@@ -90,8 +97,8 @@
 		    	out.println("<tbody>");
 		        for (Posting p : postings) {
 		        	out.println("<tr>");
-		        	out.println("<td>" + p.getRegion() + "</td>");
 		        	out.println("<td><a href=\"page?post-id=" + p.getId() + "\">" + p.getTitle() + "</a></td>");
+		        	out.println("<td>" + p.getRegion() + "</td>");
 		        	out.println("<td>" + p.getPrice() + "</td>");
 		        	out.println("</tr>");
 		        }

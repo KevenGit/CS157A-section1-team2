@@ -56,31 +56,24 @@
 	<!-- Page -->
 	<div class="viewPosting-wrapper">
 		<div class="viewPosting-header">
-            <ul>
-                <li id="contact">Contact:</li>
-                <li><%= seller.getFirstName() + " " + seller.getLastName() %></li>
-                <li><%= seller.getEmail() %></li>
-                <li><%= seller.getPhone() %></li>
-            </ul>
-
-            <div class="buttons">
-                <form action="#" method="POST">
-                    <input type="hidden" name="post-id" value=<%= posting.getId() %>>
-                    <input type="hidden" name="user-id" value=<%= Math.toIntExact(userId) %>>
-                    <input type="submit" name="submit" value="flag">
-                    <input type="submit" name="submit" value="favorite">
-                </form>
+			<div class="contacts">
+	            <ul>
+	                <li id="contact">Contact:</li>
+	                <li><%= seller.getFirstName() + " " + seller.getLastName() %></li>
+	                <li><%= seller.getEmail() %></li>
+	                <li><%= seller.getPhone() %></li>
+	            </ul>
             </div>
         </div>
 	<%
 		for (Suite s : suites) {
+			out.println("<div class=\"viewPosting-suite\">");
             out.println(
-            	"<form action=\"#\" method=\"POST\">\n" +
+            	"<form action=\"page\" method=\"POST\">\n" +
            			"<input type=\"hidden\" name=\"suite-id\" value=" + s.getId() + ">\n" +
            			"<input type=\"hidden\" name=\"post-id\" value=" + posting.getId() + ">\n" +
-            		"<input type=\"submit\" name=\"submit\" value=\"delete\">\n" +
+            		"<button type=\"submit\" name=\"action\" value=\"delete-suite\">Delete</button>\n" +
         		"</form>");
-			out.println("<div class=\"viewPosting-suite\">");
 			out.println("<h1>" + s.getHeading() + "</h1>");
 			out.println("<img src=\"" + s.getImgPath() + "\">");
 			out.println("<p>" + s.getParagraph() + "</p>");

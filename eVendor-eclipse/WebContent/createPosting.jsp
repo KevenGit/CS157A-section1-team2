@@ -17,8 +17,6 @@
     }
 %>
 
-<% request.setAttribute("sumbit", "create"); %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,29 +48,23 @@
 	<!-- Page -->
 	<div class="createPosting-wrapper">
 		<form id="createPosting-form" action="postings" method="GET">
-			<div>
-				<label for="title">Title</label><br> <input type="text"
-					name="title" id="title" placeholder="Enter Title ..." required>
-			</div>
+			<label for="title">Title</label><br>
+			<input type="text" name="title" id="title" placeholder="Enter Title ..." required>
 
-			<div>
-				<label for="category">Category</label><br> <select
-					name="category" id="category" required>
+
+			<label for="category">Category</label><br>
+			<select name="category" id="category" required>
 					<option value="Other">Select a Category</option>
-				</select>
-			</div>
+			</select>
 
-			<div>
-				<label for="region">Region</label><br> <select name="region"
-					id="region" required>
-					<option value="None">Select a Region</option>
-				</select>
-			</div>
+			<label for="region">Region</label><br>
+			<select name="region" id="region" required>
+				<option value="None">Select a Region</option>
+			</select>
 
-			<div>
-				<label for="price">Price</label><br> <input type="number"
-					name="price" id="price" min=0 step=0.01 required>
-			</div>
+
+			<label for="price">Price</label><br>
+			<input type="number" name="price" id="price" min=0 step=0.01 required>
 			
 			<input type="hidden" name="seller-id" value=<%= Math.toIntExact(userId) %>>
 			<button type="submit" name="submit" value="create-posting">Create</button>

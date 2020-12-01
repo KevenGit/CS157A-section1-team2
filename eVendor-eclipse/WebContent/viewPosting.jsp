@@ -11,8 +11,10 @@
     String phone = (String) session.getAttribute("phone");
     String loginLink = "<a href=\"logout.jsp\">Logout</a>";
     String postLink = "<a href=\"createPosting.jsp\">Post</a>";
+    boolean loggedIn = true;
     if (username == null) {
         loginLink = "<a href=\"account.jsp\">Login</a>";
+        loggedIn = false;
     }
     
     if (phone == null) {
@@ -55,19 +57,35 @@
 	<!-- Page -->
 	<div class="viewPosting-wrapper">
 		<div class="viewPosting-header">
-            <ul>
-                <li id="contact">Contact:</li>
-                <li><%= seller.getFirstName() + " " + seller.getLastName() %></li>
-                <li><%= seller.getEmail() %></li>
-                <li><%= seller.getPhone() %></li>
-            </ul>
-
+			<div class="contacts">
+	            <ul>
+	                <li id="contact">Contact:</li>
+	                <li><%= seller.getFirstName() + " " + seller.getLastName() %></li>
+	                <li><%= seller.getEmail() %></li>
+	                <li><%= seller.getPhone() %></li>
+	            </ul>
+			</div>
+			
             <div class="buttons">
+            	<form action="#" method="POST">
+                    <input type="hidden" name="post-id" value=<%= posting.getId() %>>
+                    <input type="hidden" name="user-id" value=<%= Math.toIntExact(userId) %>>
+                    <input type="hidden" name="seller-id" value=<%= Math.toIntExact(seller.getId()) %>>
+                    <%
+                    	if (loggedIn)
+                    		out.println("<button type=\"submit\" name=\"action\" value=\"purchase\">"
+                    					+ posting.getPrice() + "</button>");
+                    %>
+                </form>
+            	
                 <form action="#" method="POST">
                     <input type="hidden" name="post-id" value=<%= posting.getId() %>>
                     <input type="hidden" name="user-id" value=<%= Math.toIntExact(userId) %>>
-                    <input type="submit" name="submit" value="flag">
-                    <input type="submit" name="submit" value="favorite">
+                    <%
+                    	if (loggedIn)
+                    		out.println("<button type=\"submit\" name=\"action\" value=\"favorite\">"
+                    					+ "Favorite</button>");
+                    %>
                 </form>
             </div>
         </div>
