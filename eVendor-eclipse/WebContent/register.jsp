@@ -16,9 +16,14 @@
 %>
 
 <%
+//get info from register form 
     String email = request.getParameter("regis_email");
     String password = request.getParameter("regis_password");
     String username = request.getParameter("regis_username");
+    String first_name = request.getParameter("regis_first_name");
+    String last_name = request.getParameter("regis_last_name");
+    //String phone_number = request.getParameter("regis_phone_number");
+    
     String msg = "";
 
     int numRowsUpdated;
@@ -30,11 +35,12 @@
         String hashedPasswordBase64 = new Sha256Hash(password, salt, 1024).toBase64();
         String saltBase64 = salt.toBase64();
         // Add account:
-       Class.forName("com.mysql.cj.jdbc.Driver");
-       Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/e_vendor_data_test?serverTimezone=EST5EDT","root", "root");
+        //Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection conn = DbUtils.getConnection();
+        //Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/e_vendor_data_test?serverTimezone=EST5EDT","root", "root");
 	
         String sqlInsert = "INSERT INTO user(username, hash_pw, pw_salt, first_name, last_name, email, balance) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        List parameters = Arrays.asList(username, hashedPasswordBase64, saltBase64, "Hello", "World", email, 0);
+        List parameters = Arrays.asList(username, hashedPasswordBase64, saltBase64, first_name, last_name, email, 0);
         try {
             numRowsUpdated = DbUtils.update(conn, sqlInsert, parameters);
             msg = "User added successfully!";
@@ -42,7 +48,7 @@
             msg = e.getMessage();
         }
         DbUtils.close(conn);
-        response.sendRedirect("account.html");
+        response.sendRedirect("account.jsp?status=" + msg);
     } else {
         msg = "Invalid input";
         response.sendRedirect("account.jsp?status=" + msg);

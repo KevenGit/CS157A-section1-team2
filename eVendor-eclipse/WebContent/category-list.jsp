@@ -2,7 +2,17 @@
     pageEncoding="ISO-8859-1"%>
 <%@ page import="java.sql.*" %>
 <%@ page import="java.util.*" %>
-<%@ page import="com.cs157a.evendor.model.*" %>
+
+<%  // Check if user logged in (username and accountId should be set after logging in.
+    String username = (String) session.getAttribute("username");     //username is in fact the account email
+    String accountId = (String) session.getAttribute("userId");   //the account id
+    String loginLink = "<a href=\"logout.jsp\">Logout</a>";
+    if (username == null) {
+        loginLink = "<a href=\"account.jsp\">Login</a>";
+    }
+%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,11 +29,11 @@
 		</div>
 		<nav>
 			<ul>
-				<li><a href="index.html">Home</a></li>
+				<li><a href="index.jsp">Home</a></li>
 				<li><a href="category.html">Category</a></li>
-				<li><a href="">About</a></li>
+				<li><a href ="userAccount.jsp">Account</a></li>
 				<li><a href="posting.jsp">Post</a></li>
-				<li><a href="account.html">Login</a></li>
+				<li><%=loginLink%></li>
 				
 			</ul>
 		</nav>
@@ -37,7 +47,7 @@
 		
 		out.println("<table class=\"cat-list-table\">");
 		
-		List<Posting> postings = (List<Posting>) request.getAttribute("result");
+		List<Map<String, Object>> result = (List) request.getAttribute("result");
 		
     	out.println("<thead>\n<tr>");
     	out.println("<th>Title</th>");
@@ -46,11 +56,11 @@
     	out.println("</tr>\n</thead>");
 		
     	out.println("<tbody>");
-        for (Posting p : postings) {
+        for (Map<String, Object> t : result) {
         	out.println("<tr>");
-        	out.println("<td><a href=\"SuiteServlet?id=" + p.getId() + "\">" + p.getTitle() + "</a></td>");
-        	out.println("<td>" + p.getPrice() + "</td>");
-        	out.println("<td>" + p.getRegion() + "</td>");
+        	out.println("<td>" + t.get("title") + "</td>");
+        	out.println("<td>" + t.get("price") + "</td>");
+        	out.println("<td>" + t.get("region") + "</td>");
         	out.println("</tr>");
         }
         

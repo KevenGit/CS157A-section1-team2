@@ -24,23 +24,27 @@
     String username = request.getParameter("login_username");
     String password = request.getParameter("login_password");
     Class.forName("com.mysql.cj.jdbc.Driver");
-    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/e_vendor_data_test?serverTimezone=EST5EDT","root", "root");
+    Connection conn = DbUtils.getConnection();
+    //Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/e_vendor_data_test?serverTimezone=EST5EDT","root", "Yumi2Shoyu");
     User user = DbUtils.getUser(conn, username);
     DbUtils.close(conn);
     if (validate(username, password, user)) {
         // Set attributes:
         session.setAttribute("username", username);
-        session.setAttribute("userId", user.getId()+"");
+        session.setAttribute("userId", user.getId());
+        session.setAttribute("first_name", user.getFirstName());
+        session.setAttribute("last_name", user.getLastName());
+        session.setAttribute("email", user.getEmail());
         // Redirect to the previous page: TBD
         msg = "Logged in successful";
-        response.sendRedirect("index.html");
+        response.sendRedirect("index.jsp");
     } else {
         // Clear the session:
         session.removeAttribute("username");
         session.removeAttribute("userId");
         // Redirect to error page: TBD
         msg = "Invalid username/password";
-        response.sendRedirect("account.html?status=" + msg);
+        response.sendRedirect("account.jsp?status=" + msg);
     }
 %>
 <!DOCTYPE html>

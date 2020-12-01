@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.*;
 
 import com.cs157a.evendor.model.User;
 
@@ -191,6 +192,48 @@ public class DbUtils {
             close(rs);
             close(ps);
             close(conn);
+		}
+		return result;
+	}
+	
+	public static boolean removePosting(Connection conn, int postingId, int userId) {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		boolean result = true;
+		String sql;
+		int numRowAffected;
+		int suiteId = 0;
+		try {
+			// Delete post record
+	        sql = "DELETE FROM post WHERE post_id = ? AND seller_id = ?";
+	        List parameters = Arrays.asList(postingId, userId);
+	        numRowAffected = update(conn, sql, parameters);
+			// Get contains associated with postingId in order to obtain suite_id
+	        sql = "SELECT suite_id FROM contains WHERE post_id = ?";
+	        ps = conn.prepareStatement(sql);
+			ps.setInt(1, postingId);
+			rs = ps.executeQuery();
+            if (rs.next()) {
+            	suiteId = rs.getInt(1);
+				// Delete contains record
+		        sql = "DELETE FROM contains WHERE post_id = ? AND suite_id = ?";
+		        parameters = Arrays.asList(postingId, suiteId);
+		        numRowAffected = update(conn, sql, parameters);
+				// Delete suite record based on suite_id above
+		        sql = "DELETE FROM suite WHERE id = ?";
+		        parameters = Arrays.asList(suiteId);
+		        numRowAffected = update(conn, sql, parameters);
+            }
+			// Delete postings record
+	        sql = "DELETE FROM postings WHERE id = ?";
+	        parameters = Arrays.asList(postingId);
+	        numRowAffected = update(conn, sql, parameters);
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = false;
+		} finally {
+            close(rs);
+            close(ps);
 		}
 		return result;
 	}

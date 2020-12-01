@@ -3,5 +3,5 @@
 	session.removeAttribute("username");
     session.removeAttribute("userId");
     String msg = "Logged out successfully";
-    response.sendRedirect("account.html?status=" + msg);
+    response.sendRedirect("account.jsp?status=" + msg);
 %>
