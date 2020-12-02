@@ -21,7 +21,7 @@ public class OrderDao {
 		String sql4 = "INSERT INTO isFrom (post_id, order_id) VALUES (?, ?)";
 		String sql5 = "SELECT MAX(id) FROM" + 
 					"(SELECT id FROM orders " +
-					"WHERE delivery_address = ? AND quantity = ?)";
+					"WHERE delivery_address = ? AND quantity = ?)R";
 		String sql6 = "UPDATE user SET balance = ? WHERE id = ?";
 		
 		List<Object> params = Arrays.asList(addr, quantity);

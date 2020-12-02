@@ -65,7 +65,7 @@ public class OrderServlet extends HttpServlet {
 		
 		OrderDao.insertOrder(addr, quantity, price, postId, sellerId, userId);
 		
-		RequestDispatcher dispatch = request.getRequestDispatcher("purchase.jsp");
+		RequestDispatcher dispatch = request.getRequestDispatcher("userAccount.jsp");
 		dispatch.forward(request, response);
 	}
 }

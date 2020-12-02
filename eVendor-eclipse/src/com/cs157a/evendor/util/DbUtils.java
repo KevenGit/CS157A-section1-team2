@@ -209,14 +209,14 @@ public class DbUtils {
 	        List parameters = Arrays.asList(postingId, userId);
 	        numRowAffected = update(conn, sql, parameters);
 			// Get contains associated with postingId in order to obtain suite_id
-	        sql = "SELECT suite_id FROM contains WHERE post_id = ?";
+	        sql = "SELECT suite_id FROM contain WHERE post_id = ?";
 	        ps = conn.prepareStatement(sql);
 			ps.setInt(1, postingId);
 			rs = ps.executeQuery();
             if (rs.next()) {
             	suiteId = rs.getInt(1);
 				// Delete contains record
-		        sql = "DELETE FROM contains WHERE post_id = ? AND suite_id = ?";
+		        sql = "DELETE FROM contain WHERE post_id = ? AND suite_id = ?";
 		        parameters = Arrays.asList(postingId, suiteId);
 		        numRowAffected = update(conn, sql, parameters);
 				// Delete suite record based on suite_id above

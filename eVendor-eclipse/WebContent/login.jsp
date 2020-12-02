@@ -6,7 +6,7 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.cs157a.evendor.model.*"%>
 <%@ page import="com.cs157a.evendor.util.*"%>
-<%@ page import="com.cs157a.evendor.dao.*"%>
+<%@ page import="com.cs157a.evendor.dao.SellerDao"%>
 <%!
     public boolean validate(String username, String password, User user) {
 		if(user != null){

@@ -47,21 +47,23 @@ CREATE TABLE suite(
     PRIMARY KEY (id)
 );
 
-CREATE TABLE contains(
+CREATE TABLE contain (
 	post_id INT NOT NULL,
     suite_id INT NOT NULL,
-    index_position INT NOT NULL
+    index_position INT NOT NULL,
+    PRIMARY KEY (post_id, suite_id, index_position)
 );
 
 CREATE TABLE post(
 	seller_id INT NOT NULL,
-    post_id INT NOT NULL
+    post_id INT NOT NULL,
+    PRIMARY KEY (seller_id, post_id)
 );
 
 CREATE TABLE favorites(
 	user_id INT NOT NULL,
     post_id INT NOT NULL,
-    primary key (user_id, post_id)
+    PRIMARY KEY (user_id, post_id)
 );
 
 CREATE TABLE flag(
@@ -80,17 +82,20 @@ CREATE TABLE orders(
 
 CREATE TABLE buys(
 	user_id INT NOT NULL,
-    order_id INT NOT NULL
+    order_id INT NOT NULL,
+    PRIMARY KEY (user_id, order_id)
 );
 
 CREATE TABLE fulfills(
 	seller_id INT NOT NULL,
-    order_id INT NOT NULL
+    order_id INT NOT NULL,
+    PRIMARY KEY (seller_id, order_id)
 );
 
 CREATE TABLE isFrom(
 	post_id INT NOT NULL,
-    order_id INT NOT NULL
+    order_id INT NOT NULL,
+    PRIMARY KEY (post_id, order_id)
 );
 
 USE e_vendor_data_test;
@@ -186,21 +191,21 @@ insert into suite (id, heading, paragraph, img_path) values (14, 'Cool Blender',
 insert into suite (id, heading, paragraph, img_path) values (15, 'Test your CS skills', 'Can you solve this puzzle? It''ll require a solid understanding of Databases to get through this!', '/img/img15.jpeg');
 
 # Fill contains table
-insert into contains (post_id, suite_id, index_position) values (1, 1, 1);
-insert into contains (post_id, suite_id, index_position) values (2, 2, 1);
-insert into contains (post_id, suite_id, index_position) values (3, 3, 1);
-insert into contains (post_id, suite_id, index_position) values (4, 4, 1);
-insert into contains (post_id, suite_id, index_position) values (5, 5, 1);
-insert into contains (post_id, suite_id, index_position) values (6, 6, 1);
-insert into contains (post_id, suite_id, index_position) values (7, 7, 1);
-insert into contains (post_id, suite_id, index_position) values (8, 8, 1);
-insert into contains (post_id, suite_id, index_position) values (9, 9, 1);
-insert into contains (post_id, suite_id, index_position) values (10, 10, 1);
-insert into contains (post_id, suite_id, index_position) values (11, 11, 1);
-insert into contains (post_id, suite_id, index_position) values (12, 12, 1);
-insert into contains (post_id, suite_id, index_position) values (13, 13, 1);
-insert into contains (post_id, suite_id, index_position) values (14, 14, 1);
-insert into contains (post_id, suite_id, index_position) values (15, 15, 1);
+insert into contain (post_id, suite_id, index_position) values (1, 1, 1);
+insert into contain (post_id, suite_id, index_position) values (2, 2, 1);
+insert into contain (post_id, suite_id, index_position) values (3, 3, 1);
+insert into contain (post_id, suite_id, index_position) values (4, 4, 1);
+insert into contain (post_id, suite_id, index_position) values (5, 5, 1);
+insert into contain (post_id, suite_id, index_position) values (6, 6, 1);
+insert into contain (post_id, suite_id, index_position) values (7, 7, 1);
+insert into contain (post_id, suite_id, index_position) values (8, 8, 1);
+insert into contain (post_id, suite_id, index_position) values (9, 9, 1);
+insert into contain (post_id, suite_id, index_position) values (10, 10, 1);
+insert into contain (post_id, suite_id, index_position) values (11, 11, 1);
+insert into contain (post_id, suite_id, index_position) values (12, 12, 1);
+insert into contain (post_id, suite_id, index_position) values (13, 13, 1);
+insert into contain (post_id, suite_id, index_position) values (14, 14, 1);
+insert into contain (post_id, suite_id, index_position) values (15, 15, 1);
 
 # Fill post table
 insert into post (seller_id, post_id) values (6, 1);

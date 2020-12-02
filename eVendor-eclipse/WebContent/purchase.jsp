@@ -86,8 +86,8 @@
 			<input type="hidden" name="seller-id" value=<%= seller.getId() %>>
 			<input type="hidden" name="user-id" value=<%= Math.toIntExact(userId) %>>
 			<input type="hidden" name="price" value=<%= posting.getPrice() %>>
+			<button type="submit" name="action" value="purchase">Purchase</button>
 		</form>
-		<button type="submit" name="action" value="purchase">Purchase</button>
 	</div>
 
 
