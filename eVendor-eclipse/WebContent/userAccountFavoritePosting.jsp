@@ -82,34 +82,38 @@
 	String sql = "SELECT id, title, price FROM postings WHERE id IN(SELECT post_id FROM favorites NATURAL JOIN user WHERE favorites.user_id = user.id)";
 
     StringBuffer result = new StringBuffer();
-    result.append("<br><table width=\"100%\" border=\"0\" align=\"center\">");
+    //result.append("<br><table width=\"100%\" border=\"0\" align=\"center\">");
     //column header
-    result.append("<tr bgcolor=\"aabbcc\"><td>Title</td><td>Price</td></tr>");
-	PreparedStatement ps = null;
+   // result.append("<tr bgcolor=\"aabbcc\"><td>Title</td><td>Price</td></tr>");
+    
+	PreparedStatement stmt = null;
 	ResultSet rs = null;
 	try {
-		ps = conn.prepareStatement(sql);
-		//ps.setInt(1, Math.toIntExact(userId));
-		
-		rs = ps.executeQuery();
-		int i = 0;
-        while (rs.next()) {
-  			System.out.println(rs.getString("title") +" "+ rs.getString("price"));
-  			
-
-          //  result.append(title).append("</td>");
-          //  result.append("<td>$").append(price).append("</td>");
-
-          //  result.append("</tr>");
+		//String sql = "SELECT * FROM " + table;
+		stmt = conn.prepareStatement(sql);
+		rs = stmt.executeQuery(sql);
+        ResultSetMetaData rsmd = rs.getMetaData();
+        int columnCount = rsmd.getColumnCount();
+       // result.append("<h3>Table: " + table + "</h3>");
+        result.append("<table border=1><tr>");
+        // Print the column header: column count starts from 1
+        for (int j = 1; j <= columnCount; j++ ) {
+          String colName = rsmd.getColumnName(j);
+          result.append("<td><b>" + colName + "</b></td>");
         }
-       // result.append("</table><br>");
-    } catch (Exception e) {
-         e.printStackTrace();
-         //result.append("Exception: " + e.getMessage() + "<br>");
-	} finally {
-		DbUtils.close(rs);
-		DbUtils.close(ps);
-		DbUtils.close(conn);
+        // Print row content:
+        while (rs.next()) {
+        	result.append("</tr><tr>");
+            for (int j = 1; j <= columnCount; j++ ) {
+            	result.append("<td>" + rs.getString(j) + "</td>");
+            	//System.out.println(rs.getString(j));
+            }
+        }
+        result.append("</tr></table><br>");
+        DbUtils.close(rs);
+        DbUtils.close(stmt);
+	} catch (Exception e) {
+		e.printStackTrace();
 	}
 	
 	%>
