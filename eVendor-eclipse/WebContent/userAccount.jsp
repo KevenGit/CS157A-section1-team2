@@ -34,8 +34,41 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.cs157a.evendor.model.*"%>
 <%@ page import="com.cs157a.evendor.util.*"%>
+<%@ page import="com.cs157a.evendor.dao.*"%>
 
-	<%
+
+<% Posting posting = (Posting) request.getAttribute("posting"); %>
+<% User user = (User) request.getAttribute("user"); %>
+<% Favorite fav = (Favorite) request.getAttribute("fav"); %>
+
+	
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<title>User Account</title>
+</head>
+<body>
+
+	<!-- Header -->
+	<div class="header">	
+	<div class="container">
+	<div class = "navbar"> 
+		<div class = "logo">
+		<img src="images/logo.png" width="125px">		
+		</div>
+		<nav>
+			<ul>
+				<li><a href="index.jsp">Home</a></li>
+				<li><a href="search-form.jsp">Search</a></li>
+				<li><%=postLink %></li>
+				<li><a href="userAccount.jsp">Account</a></li>
+				<li><%=loginLink%></li>	
+			</ul>
+		</nav>
+	</div></div></div>
+		<%
 
 	//connect to retrieve info
 	Connection conn = DbUtils.getConnection();
@@ -88,34 +121,6 @@
 	
 	%>
 	
-
-<!DOCTYPE html>
-<html>
-<head>
-<link rel="stylesheet" href="css/style.css">
-<meta charset="UTF-8">
-<title>User Account</title>
-</head>
-<body>
-
-	<!-- Header -->
-	<div class="header">	
-	<div class="container">
-	<div class = "navbar"> 
-		<div class = "logo">
-		<img src="images/logo.png" width="125px">		
-		</div>
-		<nav>
-			<ul>
-				<li><a href="index.jsp">Home</a></li>
-				<li><a href="search-form.jsp">Search</a></li>
-				<li><%=postLink %></li>
-				<li><a href="userAccount.jsp">Account</a></li>
-				<li><%=loginLink%></li>	
-			</ul>
-		</nav>
-	</div></div></div>
-	
 	<!-- We can assume that the user is logged in, first display a table of their basic info-->
 	<table width="100%">
 		<tr><td align="left"><b>Home of <%=userFirstName%> <%=userLastName%></b></td>
@@ -124,7 +129,14 @@
 		</tr>
 	</table>
 	<hr>
-	<%=msg%>
+	<%=msg%> 
 	<%=result.toString()%>
+	
+		<div class="btn-cont">
+		<button class="fav-post" type="submit" onclick="document.location='userAccountFavoritePosting.jsp'">My favorite postings</button>
+		<br>
+		<br>
+		<button class="order-history" type="submit" onclick="document.location='userAccountOrderHistory.jsp'">My favorite postings</button>
+		</div>
 </body>
 </html>

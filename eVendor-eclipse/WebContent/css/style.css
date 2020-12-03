@@ -302,3 +302,40 @@ form a {
 .search-result-table tbody tr td img {
     width: 100px;
 }
+
+
+/*user-account favorite list table*/
+
+.fav-table table, td, th {
+  border: 1px solid black;
+}
+
+.fav-table table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.fav-table th {
+  height: 70px;
+}
+
+
+.btn-cont{
+	background-color: lightBlue;
+}
+.fav-post{
+	width: 500px;
+	height: 100px;
+	margin-top: 50px;
+	margin-left:350px;
+	
+}
+
+.order-history{
+		width: 500px;
+	height: 100px;
+	margin-top: 50px;
+	margin-left:350px;
+	
+}
+	
