@@ -40,7 +40,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>User order history</title>
 <link rel="stylesheet" href="css/purchaseStyle.css">
 </head>
 <body>
@@ -72,18 +72,69 @@
 	<hr>
 
 	
-	<!-- display the list of favorite posting -->
-	<div class="order-list">
-		<div class="order-col">
-			<h3>My order</h3>
-			<table class="order-table">
-				<tr>
-				<th>Posting Title</th>
-				<th>Date of Order</th>
-				<th>SubTotal</th>
-			</table>
-		</div>
-	</div>
+	<!-- display the order history-->
+	<%
+		Connection conn = DbUtils.getConnection();
+		//get the date of order and quantity
+		String sql1 = "SELECT id, date,quantity FROM orders WHERE id IN(SELECT order_id FROM buys WHERE user_id=?)";
+		
+		//get posting title and price
+		String sql2 = "SELECT title,price from postings WHERE id IN (SELECT post_id FROM isfrom NATURAL JOIN buys WHERE id=?)";
+		
+
+					
+	    StringBuffer result = new StringBuffer();
+	    result.append("<h3 align=\"center\">My Order History</h3>");
+	    result.append("<br><table width=\"50%\" border=\"0\" align=\"center\">");
+	    //column header
+	    result.append("<tr bgcolor=\"aabbcc\"><td>Posting Title</td><td>Date of Order</td><td>Price * Quantity</td></tr>");
+		PreparedStatement ps1 = null;
+		PreparedStatement ps2 = null;
+		ResultSet rs1 = null;
+		ResultSet rs2 = null;
+		try {
+			ps1 = conn.prepareStatement(sql1);			
+			ps1.setInt(1, Math.toIntExact(userId));			
+			rs1 = ps1.executeQuery();
+			
+			ps2 = conn.prepareStatement(sql2);			
+			ps2.setInt(1, Math.toIntExact(userId));			
+			rs2 = ps2.executeQuery();			
+			
+			//int i = 0;
+	        while (rs1.next()) {
+	  			
+	  			int postId = rs1.getInt("id");
+	  			String date = rs1.getString("date");
+	  			int quantity = rs1.getInt("quantity");
+	  			String title = rs2.getString("title");
+	  			double price = rs2.getDouble("price");
+	  			double subtotal = quantity * price;
+	  			
+	  			result.append("<tr><br>");
+	  			
+	          	result.append("<td>").append("<a href=\"page?").append("post-id=" + postId + "\">").append(title + "</a></td>");
+	          	result.append("<td>").append(date).append("</td>");
+	          	result.append("<td>$").append(subtotal).append("</td>");
+
+	         	result.append("</tr>");
+	        }
+	        result.append("</table><br>");
+	    } catch (Exception e) {
+	         e.printStackTrace();
+	         result.append("Exception: " + e.getMessage() + "<br>");
+		} finally {
+			DbUtils.close(rs1);
+			DbUtils.close(ps1);
+			DbUtils.close(rs2);
+			DbUtils.close(ps2);
+			DbUtils.close(conn);
+		}
+		
+		%>
+		
+		<%=result.toString() %>
+
 
 </body>
 </html>

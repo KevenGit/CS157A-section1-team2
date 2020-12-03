@@ -79,44 +79,47 @@
 		<%
 		Connection conn = DbUtils.getConnection();
 
-	String sql = "SELECT id, title, price FROM postings WHERE id IN(SELECT post_id FROM favorites NATURAL JOIN user WHERE favorites.user_id = user.id)";
+		String sql = "SELECT id, title, price FROM postings WHERE id IN (SELECT post_id FROM favorites WHERE favorites.user_id = ?)";
 
-    StringBuffer result = new StringBuffer();
-    //result.append("<br><table width=\"100%\" border=\"0\" align=\"center\">");
-    //column header
-   // result.append("<tr bgcolor=\"aabbcc\"><td>Title</td><td>Price</td></tr>");
-    
-	PreparedStatement stmt = null;
-	ResultSet rs = null;
-	try {
-		//String sql = "SELECT * FROM " + table;
-		stmt = conn.prepareStatement(sql);
-		rs = stmt.executeQuery(sql);
-        ResultSetMetaData rsmd = rs.getMetaData();
-        int columnCount = rsmd.getColumnCount();
-       // result.append("<h3>Table: " + table + "</h3>");
-        result.append("<table border=1><tr>");
-        // Print the column header: column count starts from 1
-        for (int j = 1; j <= columnCount; j++ ) {
-          String colName = rsmd.getColumnName(j);
-          result.append("<td><b>" + colName + "</b></td>");
-        }
-        // Print row content:
-        while (rs.next()) {
-        	result.append("</tr><tr>");
-            for (int j = 1; j <= columnCount; j++ ) {
-            	result.append("<td>" + rs.getString(j) + "</td>");
-            	//System.out.println(rs.getString(j));
-            }
-        }
-        result.append("</tr></table><br>");
-        DbUtils.close(rs);
-        DbUtils.close(stmt);
-	} catch (Exception e) {
-		e.printStackTrace();
-	}
-	
-	%>
+	    StringBuffer result = new StringBuffer();
+	    result.append("<h3 align=\"center\">My Favorite Postings</h3>");
+	    result.append("<br><table width=\"50%\" border=\"0\" align=\"center\">");
+	    //column header
+	    result.append("<tr bgcolor=\"aabbcc\"><td align=\"center\">Title</td><td>Price</td></tr>");
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, Math.toIntExact(userId));
+			
+			rs = ps.executeQuery();
+			int i = 0;
+	        while (rs.next()) {
+	  			
+	  			int postId = rs.getInt("id");
+	  			String title = rs.getString("title");
+	  			double price = rs.getDouble("price");
+	  			
+	  			result.append("<tr><br>");
+	  			
+	          	result.append("<td>").append("<a href=\"page?").append("post-id=" + postId + "\">").append(title + "</a></td>");
+	          	result.append("<td>$").append(price).append("</td>");
+
+	         	result.append("</tr>");
+	        }
+	        result.append("</table><br>");
+	    } catch (Exception e) {
+	         e.printStackTrace();
+	         //result.append("Exception: " + e.getMessage() + "<br>");
+		} finally {
+			DbUtils.close(rs);
+			DbUtils.close(ps);
+			DbUtils.close(conn);
+		}
+		
+		%>
+		
+		<%=result.toString() %>
 
 
 
