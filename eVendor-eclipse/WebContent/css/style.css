@@ -241,52 +241,74 @@ form a {
 /* Search Form CSS*/
 .search-form-wrapper {
     width: 1000px;
+    max-height: 100%;
     margin: 0 auto;
+    padding-bottom: 20px;
+    background-color: aliceblue;
+    border-style: none;
+
+    box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
 }
 
-#search-form {
-    padding-bottom: 1rem;
-    background-color: #ccc;
+.search-form-box {
+    background: #fff;
+	width: 100%;
+	padding: 20px 20px;
+    margin: 30px auto;
+    box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+    font-size: 20px;
+    border-bottom: 2px solid #000000;
 }
 
-#search-form input {
-    width: 90%;
-    height: 25px;
-    margin: 1rem auto;
+.search-form-box h1 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2px;
+}
+
+.search-form-box input[type="text"] {
+    width: 80%;
+    height: 35px;
+    margin: 20px 1rem;
     padding: 0 10px;
-    border: 1px solid;
     font-size: 1rem;
+    border: 2px solid #ccc;
 }
 
-#search-form button {
-    width: auto;
+.search-form-wrapper button {
+    width: 10%;
     height: 30px;
+    border-radius: 30px;
+    background: #ff523b;
+    color: #fff;
+    font-weight: bold;
     font-size: 1rem;
-    font-weight: 100;
+    border-style: solid;
+    border-color: black;
 }
 
-.selector-wrapper {
-    width: 100%;
-    margin: 10px auto;
-    font-size: large;
-    font-weight: bolder;
+.search-form-wrapper button:hover {
+	background: #772929;
 }
 
-.selector-wrapper select {
+.search-form-wrapper select {
     width: 200px;
-    height: 20px;
-    margin: 0 10px;
+    height: 30px;
+    margin: 0 20px;
+    border: 2px solid #ccc;
 }
 
 .search-result-table {
-    width: 100%;
+    width: 95%;
     border-collapse: collapse;
-    margin: 25px 0;
+    margin: 0 auto;
 }
 
 .search-result-table thead tr {
-    background-color: #ccc;
+    background-color: #ff523b;
     text-align: left;
+    border: 2px solid #000000;
 }
 
 .search-result-table tbody tr {
@@ -299,10 +321,216 @@ form a {
     padding: 12px 15px;
 }
 
-.search-result-table tbody tr td img {
-    width: 100px;
+.search-result-table td a {
+    text-decoration: none;
 }
 
+/* Create Posting CSS*/
+.createPosting-wrapper {
+    width: 1000px;
+    max-height: 100%;
+    margin: 0 auto;
+    background-color: aliceblue;
+    border-style: none;
+    padding: 20px 0;
+
+    box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
+}
+
+.createPosting-formbox button {
+    width: 50%;
+    height: 30px;
+    margin: 0 auto;
+    margin-left: 10px;
+    border-radius: 30px;
+    background: #ff523b;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1rem;
+    border-style: solid;
+    border-color: black;
+}
+
+.createPosting-formbox button:hover {
+	background: #772929;
+}
+
+.createPosting-formbox {
+    background: #fff;
+	width: 50%;
+	height: 550px;
+	padding: 20px 20px;
+    margin: 30px auto;
+    box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.createPosting-formbox h3 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 25px;
+}
+
+.createPosting-formbox input, select {
+    width: 100%;
+    margin: 10px auto 35px auto;
+    height: 30px; 
+    border: 2px solid #ccc;
+}
+
+/* Posting page CSS*/
+.editPosting-wrapper {
+    width: 1000px;
+    max-height: 100%;
+    margin: 0 auto;
+    padding-bottom: 20px;
+    background-color: aliceblue;
+    border-style: none;
+
+    box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
+}
+
+.editPosting-wrapper button {
+    width: 100px;
+    height: 30px;
+    border-radius: 30px;
+    background: #ff523b;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1rem;
+    border-style: solid;
+    border-color: black;
+}
+
+.editPosting-wrapper button:hover {
+	background: #772929;
+}
+
+.editPosting-infobar {
+    width: 100%;
+    height: 60px;
+    background-color: #b5dcff;
+    border: solid;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.editPosting-contactbox {
+    width: 70%;
+}
+
+.editPosting-contactbox ul {
+    list-style: none;
+}
+
+.editPosting-contactbox ul li {
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    display: inline-block;
+    padding: 0px 20px;
+}
+
+.editPosting-contactbox ul #contact {
+    font-size: 20px;
+    font-weight: 1000;
+}
+
+.editPosting-buttonbox {
+    width: 30%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.editPosting-suite {
+    width: 90%;
+    margin: 10px auto 10px auto;
+    border-style: solid;
+    padding: 20px 20px;
+    text-align: center;
+}
+
+.viewPosting-suite {
+    width: 90%;
+    margin: 10px auto 10px auto;
+    border-style: none;
+    padding: 20px 20px;
+    text-align: center;
+}
+
+.viewPosting-suite h2 {
+    font-size: 50px;
+    margin: 20px;
+}
+
+.viewPosting-suite img {
+    width: 50%;
+    border-style: solid;
+    border-width: 2px;
+}
+
+.viewPosting-suite p {
+    width: 90%;
+    margin: 20px auto;
+    font-size: 25px;
+}
+
+.editPosting-suite h2 {
+    font-size: 50px;
+    margin: 20px;
+}
+
+.editPosting-suite img {
+    width: 50%;
+    border-style: solid;
+    border-width: 2px;
+}
+
+.editPosting-suite p {
+    width: 90%;
+    margin: 20px auto;
+    font-size: 25px;
+}
+
+.editPosting-formbox {
+    background: #fff;
+	width: 50%;
+	height: 550px;
+	padding: 20px 20px;
+    margin: 30px auto;
+    box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.editPosting-formbox h3 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 25px;
+}
+
+.editPosting-formbox input {
+    width: 100%;
+    margin: 10px auto 35px auto;
+    height: 30px; 
+    border: 2px solid #ccc;
+}
+
+.editPosting-formbox textarea {
+    width: 100%;
+    height: 150px;
+    max-width: 100%;
+    max-height: 165px;
+    margin: 10px auto 35px auto;
+    border: 2px solid #ccc;
+}
+
+.editPosting-formbox button {
+    width: 50%;
+    margin-left: 110px;
+}
 
 /*user-account favorite list table*/
 
@@ -337,5 +565,72 @@ form a {
 	margin-top: 50px;
 	margin-left:350px;
 	
+}
+
+/* Purchase Form CSS */
+.purchase-wrapper {
+    width: 1000px;
+    max-height: 100%;
+    margin: 0 auto;
+    padding: 20px 0;
+    background-color: aliceblue;
+    border-style: none;
+
+    box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
+}
+
+.purchase-formbox {
+    background: #fff;
+	width: 70%;
+	height: 590px;
+	padding: 20px 20px;
+    margin: 30px auto;
+    box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.purchase-formbox h3 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 25px;
+}
+
+.purchase-formbox ul {
+    list-style: none;
+    margin: 20px 0;
+}
+
+.purchase-formbox ul li {
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    display: inline-block;
+    padding: 0px 20px;
+}
+
+.purchase-formbox input, select {
+    width: 100%;
+    margin: 10px auto 35px auto;
+    height: 30px; 
+    border: 2px solid #ccc;
+}
+
+.purchase-formbox button {
+    width: 50%;
+    height: 30px;
+    margin: 0 auto;
+    margin-left: 160px;
+    border-radius: 30px;
+    background: #ff523b;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1rem;
+    border-style: solid;
+    border-color: black;
+}
+
+.purchase-formbox button:hover {
+	background: #772929;
 }
 	

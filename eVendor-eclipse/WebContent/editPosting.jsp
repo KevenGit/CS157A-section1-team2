@@ -55,20 +55,22 @@
 	</div></div></div>
 
 	<!-- Page -->
-	<div class="viewPosting-wrapper">
-		<div class="viewPosting-header">
-			<div class="contacts">
-	            <ul>
-	                <li id="contact">Contact:</li>
-	                <li><%= seller.getFirstName() + " " + seller.getLastName() %></li>
-	                <li><%= seller.getEmail() %></li>
-	                <li><%= seller.getPhone() %></li>
-	            </ul>
-            </div>
+	<div class="editPosting-wrapper">
+		<div class="editPosting-infobar">
+			<div class="editPosting-contactbox">
+				<div class="contacts">
+		            <ul>
+		                <li id="contact">Contact:</li>
+		                <li><%= seller.getFirstName() + " " + seller.getLastName() %></li>
+		                <li><%= seller.getEmail() %></li>
+		                <li><%= seller.getPhone() %></li>
+		            </ul>
+	            </div>
+	        </div>
         </div>
 	<%
 		for (Suite s : suites) {
-			out.println("<div class=\"viewPosting-suite\">");
+			out.println("<div class=\"editPosting-suite\">");
             out.println(
             	"<form action=\"page\" method=\"POST\">\n" +
            			"<input type=\"hidden\" name=\"suite-id\" value=" + s.getId() + ">\n" +
@@ -83,7 +85,7 @@
 		}
 	%>
 	
-		<div class="form">
+		<div class="editPosting-formbox">
             <h3>Create a New Suite</h3>
             <form id="suite-form" action="upload" method="POST" enctype="multipart/form-data">
                 Heading <br>

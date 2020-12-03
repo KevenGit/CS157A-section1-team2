@@ -51,24 +51,24 @@
 
 	<!-- Page -->
 	<div class="search-form-wrapper">
-		<h1>Search For Postings</h1>
-		<form id="search-form" action="postings" method="POST">
-			<input type="text" name="search" placeholder="Search ...">
-			<button type="submit" name="submit" value="search-posting">Search</button>
-
-			<br>
-
-			<div class="selector-wrapper">
+		<div class="search-form-box">
+			<h1>Search For Postings</h1>
+			<form id="search-form" action="postings" method="POST">
+				<input type="text" name="search" placeholder="Search ...">
+				<button type="submit" name="submit" value="search-posting">Search</button>
+	
+				<br>
+	
 				<label for="category">Category</label> 
 				<select name="category" id="category">
 					<option value="None">Select a Category</option>
 				</select>
-				
+					
 				<label for="region">Region</label>
 				<select name="region" id="region">
 					<option value="None">Select a Region</option>
 				</select>
-				
+					
 				<label for="price">Price</label>
 				<select name="price" id="price">
 					<option value="Any">Price Range</option>
@@ -78,9 +78,9 @@
 					<option value="60.0-99.99">$60 - $100</option>
 					<option value="100.0-10000.00">$100 and over</option>
 				</select>
-			</div>
-		</form>
-
+			</form>
+		</div>
+		
 		<table class="search-result-table">
 			<%
 			List<Posting> postings = (List<Posting>) request.getAttribute("result");

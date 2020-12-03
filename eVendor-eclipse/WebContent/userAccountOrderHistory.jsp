@@ -41,7 +41,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>User order history</title>
-<link rel="stylesheet" href="css/purchaseStyle.css">
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 	<!-- Header -->

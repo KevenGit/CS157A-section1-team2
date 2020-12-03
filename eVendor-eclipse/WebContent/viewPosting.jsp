@@ -56,9 +56,9 @@
 	</div></div></div>
 
 	<!-- Page -->
-	<div class="viewPosting-wrapper">
-		<div class="viewPosting-header">
-			<div class="contacts">
+	<div class="editPosting-wrapper">
+		<div class="editPosting-infobar">
+			<div class="editPosting-contactbox">
 	            <ul>
 	                <li id="contact">Contact:</li>
 	                <li><%= seller.getFirstName() + " " + seller.getLastName() %></li>
@@ -67,7 +67,7 @@
 	            </ul>
 			</div>
 			
-            <div class="buttons">
+            <div class="editPosting-buttonbox">
             	<form action="order" method="POST">
                     <input type="hidden" name="post-id" value=<%= posting.getId() %>>
                     <input type="hidden" name="user-id" value=<%= Math.toIntExact(userId) %>>
