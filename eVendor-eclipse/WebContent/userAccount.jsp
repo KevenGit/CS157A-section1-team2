@@ -136,10 +136,10 @@
 	<%=result.toString()%>
 	
 		<div class="btn-cont">
-		<button class="fav-post" type="submit" onclick="document.location='userAccountFavoritePosting.jsp'">My favorite postings</button>
+		<button class="fav-post" type="submit" onclick="document.location='userAccountFavoritePosting.jsp'">My Favorite Postings</button>
 		<br>
 		<br>
-		<button class="order-history" type="submit" onclick="document.location='userAccountOrderHistory.jsp'">My favorite postings</button>
+		<button class="order-history" type="submit" onclick="document.location='userAccountOrderHistory.jsp'">My Order History</button>
 		</div>
 </body>
 </html>
