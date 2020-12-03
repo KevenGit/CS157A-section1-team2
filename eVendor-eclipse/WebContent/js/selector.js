@@ -5,7 +5,7 @@ var regions = ["Alabama", "Alaska", "Arizona",
 	"South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"];
 var categories = ["antiques","appliances","arts+crafts","atv/utv/sno","auto parts","aviation","baby+kid","barter"
 ,"beauty+health","bike parts","bikes","boat parts","boats","books","business","cars+trucks","cds/dvd/vhs"
-,"cell phones","clothes+acc","collectibles","computer parts","computers","electronics","farm+garden"
+,"cell phones","clothes+acc","collectibles","computer parts","computers","electronics","farm+garden", "food"
 ,"free","furniture","garage sale","general","heavy equip","household","jewelry","materials","motorcycle parts"
 ,"motorcycles","music instr","photo+video","rvs+camp","sporting","tickets","tools","toys+games","trailers","video gaming"
 ,"wanted","wheels+tires", "other"];

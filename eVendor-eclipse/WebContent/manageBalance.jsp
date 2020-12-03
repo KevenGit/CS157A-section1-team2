@@ -78,7 +78,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Manage Balance</title>
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/purchaseStyle.css">
 </head>
 <body>
 	<!-- Header -->

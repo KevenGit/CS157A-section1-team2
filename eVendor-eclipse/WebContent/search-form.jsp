@@ -90,6 +90,7 @@
 							"<tr>\n" +
 							"<th>Title</th>\n" +
 							"<th>Region</th>\n" +
+							"<th>Category</th>\n" +
 							"<th>Price</th>\n" +
 							"</tr>\n" +
 							"</thead>");
@@ -99,6 +100,7 @@
 		        	out.println("<tr>");
 		        	out.println("<td><a href=\"page?post-id=" + p.getId() + "\">" + p.getTitle() + "</a></td>");
 		        	out.println("<td>" + p.getRegion() + "</td>");
+		        	out.println("<td>" + p.getCategory() + "</td>");
 		        	out.println("<td>" + p.getPrice() + "</td>");
 		        	out.println("</tr>");
 		        }

@@ -124,38 +124,38 @@ insert into seller (id, phone) values (12, '5442537737');
 insert into seller (id, phone) values (18, '1724427960');
 
 # Fill postings table
-insert into postings (id, title, price, category, region) values (1, 'Hair Trimmer', 5.99, 'Tool', 'Louisiana');
-insert into postings (id, title, price, category, region) values (2, 'Stress Pillow', 12.99, 'Tool', 'Texas');
-insert into postings (id, title, price, category, region) values (3, 'Stapler for Summer School', 3.99, 'Tool', 'New Jersey');
-insert into postings (id, title, price, category, region) values (4, 'Decorative Toaster', 17.99, 'Appliance', 'Pennsylvania');
-insert into postings (id, title, price, category, region) values (5, 'Bad Tasting Gum', 1.99, 'Toy', 'New York');
-insert into postings (id, title, price, category, region) values (6, 'Dark Milk Chocolate', 2.99, 'Toy', 'Florida');
-insert into postings (id, title, price, category, region) values (7, 'Funny Scarf', 8.99, 'Clothing', 'Iowa');
-insert into postings (id, title, price, category, region) values (8, 'Beautiful Vase of Flowers', 12.99, 'Tool', 'California');
-insert into postings (id, title, price, category, region) values (9, 'Fake Diamond Necklace', 11.99, 'Toy', 'Wisconsin');
-insert into postings (id, title, price, category, region) values (10, 'Small Safe', 7.99, 'Tool', 'Ohio');
-insert into postings (id, title, price, category, region) values (11, 'Coins for Magic Trick', 3.99, 'Toy', 'District of Columbia');
-insert into postings (id, title, price, category, region) values (12, 'Hiking Backpack', 11.99, 'Tool', 'Arizona');
-insert into postings (id, title, price, category, region) values (13, 'Toy Tractor', 7.99, 'Toy', 'Oklahoma');
-insert into postings (id, title, price, category, region) values (14, 'Decorative Blender', 17.99, 'Appliance', 'California');
-insert into postings (id, title, price, category, region) values (15, 'Computer Science Puzzle Game', 8.99, 'Toy', 'Texas');
+insert into postings (id, title, price, category, region) values (1, 'Hair Trimmer', 95.99, 'beauty+health', 'Texas');
+insert into postings (id, title, price, category, region) values (2, 'Stress Pillow', 12.99, 'furniture', 'Louisiana');
+insert into postings (id, title, price, category, region) values (3, 'Stapler for Summer School', 3.99, 'general', 'New Jersey');
+insert into postings (id, title, price, category, region) values (4, 'Decorative Toaster', 39.99, 'appliances', 'Pennsylvania');
+insert into postings (id, title, price, category, region) values (5, 'Bad Tasting Gum', 1.99, 'food', 'New York');
+insert into postings (id, title, price, category, region) values (6, 'Dark Milk Chocolate', 2.99, 'food', 'Florida');
+insert into postings (id, title, price, category, region) values (7, 'Funny Scarf', 8.99, 'clothes+acc', 'Iowa');
+insert into postings (id, title, price, category, region) values (8, 'Beautiful Vase of Flowers', 59.99, 'household', 'California');
+insert into postings (id, title, price, category, region) values (9, 'Fake Diamond Necklace', 19.99, 'clothes+acc', 'Wisconsin');
+insert into postings (id, title, price, category, region) values (10, 'Small Safe', 19.99, 'general', 'Ohio');
+insert into postings (id, title, price, category, region) values (11, 'Coins for Magic Trick', 4.99, 'toys+games', 'Texas');
+insert into postings (id, title, price, category, region) values (12, 'Hiking Backpack', 14.99, 'rvs+camp', 'Arizona');
+insert into postings (id, title, price, category, region) values (13, 'Toy Tractor', 7.99, 'toys+games', 'Oklahoma');
+insert into postings (id, title, price, category, region) values (14, 'Decorative Blender', 59.99, 'appliances', 'California');
+insert into postings (id, title, price, category, region) values (15, 'Computer Science Puzzle Game', 4.99, 'toys+games', 'Texas');
 
 # Fill suite table
-insert into suite (id, heading, paragraph, img_path) values (1, 'Hair Trimmer for Non-Barbers', 'Get rid of the overgrown quarantine hair!', '/img/img1.jpeg');
-insert into suite (id, heading, paragraph, img_path) values (2, 'Punch Away Your Problems', 'School or work making you angry? Get rid of it by punching our ultra soft pillow.', '/img/img2.jpeg');
-insert into suite (id, heading, paragraph, img_path) values (3, 'Small Black Stapler', 'Do you have a school this summer? Get this small stapler that fits in your pocket.', '/img/img3.jpeg');
-insert into suite (id, heading, paragraph, img_path) values (4, 'A Great Looking Toaster', 'This fancy toaster is a sleek black with decorated with zebra stripes.', '/img/img5.jpeg');
-insert into suite (id, heading, paragraph, img_path) values (5, 'Prank your Friends with this Gum', 'This special gum is pink just like regular gum but has the secret taste of feet.', '/img/img4.jpeg');
-insert into suite (id, heading, paragraph, img_path) values (6, 'Chocolate to Die For', 'This nice chocolate is healthy like dark chocoloate but just as sweet as milk chocolate.', '/img/img6.jpeg');
-insert into suite (id, heading, paragraph, img_path) values (7, 'Scarf that Looks like a Car', 'Is that a car on top of your head. This schoodie has the frame of a car on top and wheels on the ends.', '/img/img7.jpeg');
-insert into suite (id, heading, paragraph, img_path) values (8, 'A Banquet of Flowers for you Love', 'Gift this beautiful vase of flowers to your loved one this Valentine''s Day', '/img/img8.jpeg');
-insert into suite (id, heading, paragraph, img_path) values (9, 'Cheap is still Beautiful', 'This fake diamond necklace looks just like the real thing for a fraction of the price.', '/img/img9.jpeg');
-insert into suite (id, heading, paragraph, img_path) values (10, 'Keep your Stuff Safe', 'This tiny safe can store all your precious jewelry and even money.', '/img/img10.jpeg');
-insert into suite (id, heading, paragraph, img_path) values (11, 'Be a Magician with these Coins', 'Perform magic in front of your family and friends with these disappearing coins!', '/img/img11.jpeg');
-insert into suite (id, heading, paragraph, img_path) values (12, 'Small Cargo Backpack', 'Need a baackpack for a day hike. Buy this sturdy but light backpack now.', '/img/img12.jpeg');
-insert into suite (id, heading, paragraph, img_path) values (13, 'Small Tractor for Kids', 'This small toy vehicle is prefect for kids 3 and up.', '/img/img13.jpeg');
-insert into suite (id, heading, paragraph, img_path) values (14, 'Cool Blender', 'This blender is decorated like a typhoon making blending so much fun!', '/img/img14.jpeg');
-insert into suite (id, heading, paragraph, img_path) values (15, 'Test your CS skills', 'Can you solve this puzzle? It''ll require a solid understanding of Databases to get through this!', '/img/img15.jpeg');
+insert into suite (id, heading, paragraph, img_path) values (1, 'Hair Trimmer for Non-Barbers', 'Get rid of the overgrown quarantine hair!', 'img1.png');
+insert into suite (id, heading, paragraph, img_path) values (2, 'Punch Away Your Problems', 'School or work making you angry? Get rid of it by punching our ultra soft pillow.', 'img2.jpg');
+insert into suite (id, heading, paragraph, img_path) values (3, 'Small Black Stapler', 'Do you have a school this summer? Get this small stapler that fits in your pocket.', 'img3.jpg');
+insert into suite (id, heading, paragraph, img_path) values (4, 'A Great Looking Toaster', 'This fancy toaster is a sleek silver and durable as all else.', 'img4.jpeg');
+insert into suite (id, heading, paragraph, img_path) values (5, 'Prank your Friends with this Gum', 'This special gum is pink just like regular gum but has the secret taste of feet.', 'img5.jpg');
+insert into suite (id, heading, paragraph, img_path) values (6, 'Chocolate to Die For', 'This nice chocolate is healthy like dark chocoloate but just as sweet as milk chocolate.', 'img6.jpeg');
+insert into suite (id, heading, paragraph, img_path) values (7, 'Scarf that Looks like a Pencil', 'This Pencil scraf is funny and comfy. Careful not to point your neck.', 'img7.jpg');
+insert into suite (id, heading, paragraph, img_path) values (8, 'A Banquet of Flowers for your Love', 'Gift this beautiful vase of flowers to your loved one this Valentine''s Day', 'img8.jpg');
+insert into suite (id, heading, paragraph, img_path) values (9, 'Cheap is still Beautiful', 'This fake diamond necklace looks just like the real thing for a fraction of the price.', 'img9.jpg');
+insert into suite (id, heading, paragraph, img_path) values (10, 'Keep your Stuff Safe', 'This tiny safe can store all your precious jewelry and even money.', 'img10.jpeg');
+insert into suite (id, heading, paragraph, img_path) values (11, 'Be a Magician with these Coins', 'Perform magic in front of your family and friends with these disappearing coins!', 'img11.png');
+insert into suite (id, heading, paragraph, img_path) values (12, 'Small Cargo Backpack', 'Need a backpack for a day hike. Buy this sturdy but light backpack now.', 'img12.png');
+insert into suite (id, heading, paragraph, img_path) values (13, 'Small Tractor for Kids', 'This small toy vehicle is prefect for kids 3 and up.', 'img13.png');
+insert into suite (id, heading, paragraph, img_path) values (14, 'Cool Blender', 'This blender is sleek and works wonders for your smoothies', 'img14.png');
+insert into suite (id, heading, paragraph, img_path) values (15, 'Test your CS skills', 'Can you solve this puzzle? It''ll require a solid understanding of devices to get through this!', 'img15.png');
 
 # Fill contains table
 insert into contain (post_id, suite_id, index_position) values (1, 1, 1);

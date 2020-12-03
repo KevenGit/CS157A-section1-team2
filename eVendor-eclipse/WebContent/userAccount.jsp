@@ -36,18 +36,13 @@
 <%@ page import="com.cs157a.evendor.util.*"%>
 <%@ page import="com.cs157a.evendor.dao.*"%>
 
-
-<% Posting posting = (Posting) request.getAttribute("posting"); %>
-<% User user = (User) request.getAttribute("user"); %>
-<% Favorite fav = (Favorite) request.getAttribute("fav"); %>
-
 	
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="css/style.css">
 <meta charset="UTF-8">
 <title>User Account</title>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
@@ -68,59 +63,63 @@
 			</ul>
 		</nav>
 	</div></div></div>
-		<%
-
-	//connect to retrieve info
-	Connection conn = DbUtils.getConnection();
-
-	String sql = "SELECT id, title, category, price, region FROM postings WHERE id IN (SELECT post_id FROM post WHERE seller_id = ?)";
-	//String sql = "SELECT id, title, category, price, region FROM postings WHERE id IN ";
-	
+<%
+	//user is also a seller
 	StringBuffer result = new StringBuffer();
-    result.append("<br><table width=\"100%\" border=\"0\" align=\"center\">");
-    //column header
-    result.append("<tr bgcolor=\"aabbcc\"><td>Title</td><td>Price</td><td>Action</td></tr>");
-	PreparedStatement ps = null;
-	ResultSet rs = null;
-	try {
-		ps = conn.prepareStatement(sql);
-		ps.setInt(1, Math.toIntExact(userId));
+	if(phone != null){
+		//connect to retrieve info
+		Connection conn = DbUtils.getConnection();
+
+		String sql = "SELECT id, title, category, price, region FROM postings WHERE id IN (SELECT post_id FROM post WHERE seller_id = ?)";
+		//String sql = "SELECT id, title, category, price, region FROM postings WHERE id IN ";
 		
-		rs = ps.executeQuery();
-		int i = 0;
-        while (rs.next()) {
-            i++;
-            int id = rs.getInt(1);
-            String title = rs.getString(2);
-            String category = rs.getString(3);
-            double price = rs.getDouble(4);
-            String region = rs.getString(5);
-            String detailPage = "page?post-id=" + id;
-            String editPage = "page?post-id=" + id + "&action=edit-suite";
-            String removePage = "removePosting.jsp?postId=" + id;
-            
-           
-            if (i % 2 == 0)
-                result.append("<tr bgcolor=\"eeeeee\">");
-            else
-                result.append("<tr bgcolor=\"ddeedd\">");
-            result.append("<td><a href=\"").append(detailPage).append("\">").append(title).append("</a></td>");
-            result.append("<td>$").append(price).append("</td>");
-            result.append("<td><a href=\"").append(editPage).append("\">Edit</a>");
-            result.append("&nbsp;|&nbsp;<a href=\"").append(removePage).append("\">Remove</a></td>");
-            result.append("</tr>");
-        }
-        result.append("</table><br>");
-    } catch (Exception e) {
-         e.printStackTrace();
-         result.append("Exception: " + e.getMessage() + "<br>");
-	} finally {
-		DbUtils.close(rs);
-		DbUtils.close(ps);
-		DbUtils.close(conn);
+		result.append("<h3 align=\"left\">Listed Postings</h3>");
+	    result.append("<table width=\"100%\" border=\"0\" align=\"center\">");
+	    //column header
+	    result.append("<tr bgcolor=\"aabbcc\"><td>Title</td><td>Price</td><td>Action</td></tr>");
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, Math.toIntExact(userId));
+			
+			rs = ps.executeQuery();
+			int i = 0;
+	        while (rs.next()) {
+	            i++;
+	            int id = rs.getInt(1);
+	            String title = rs.getString(2);
+	            String category = rs.getString(3);
+	            double price = rs.getDouble(4);
+	            String region = rs.getString(5);
+	            String detailPage = "page?post-id=" + id;
+	            String editPage = "page?post-id=" + id + "&action=edit-suite";
+	            String removePage = "removePosting.jsp?postId=" + id;
+	            
+	           
+	            if (i % 2 == 0)
+	                result.append("<tr bgcolor=\"eeeeee\">");
+	            else
+	                result.append("<tr bgcolor=\"f0f8ff\">");
+	            result.append("<td><a href=\"").append(detailPage).append("\">").append(title).append("</a></td>");
+	            result.append("<td>$").append(price).append("</td>");
+	            result.append("<td><a href=\"").append(editPage).append("\">Edit</a>");
+	            result.append("&nbsp;|&nbsp;<a href=\"").append(removePage).append("\">Remove</a></td>");
+	            result.append("</tr>");
+	        }
+	        result.append("</table><br>");
+	    } catch (Exception e) {
+	         e.printStackTrace();
+	         result.append("Exception: " + e.getMessage() + "<br>");
+		} finally {
+			DbUtils.close(rs);
+			DbUtils.close(ps);
+			DbUtils.close(conn);
+		}
 	}
-	
-	%>
+		
+		
+%>
 	
 	<!-- We can assume that the user is logged in, first display a table of their basic info-->
 	<table width="100%">
@@ -134,8 +133,8 @@
 	<hr>
 	<%=msg%> 
 	<%=result.toString()%>
-	
-		<div class="btn-cont">
+	<!--  class="btn-cont" -->
+		<div>
 		<button class="fav-post" type="submit" onclick="document.location='userAccountFavoritePosting.jsp'">My Favorite Postings</button>
 		<br>
 		<br>

@@ -79,7 +79,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Seller Promotion Form</title>
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/purchaseStyle.css">
 </head>
 <body>
 	<!-- Header -->

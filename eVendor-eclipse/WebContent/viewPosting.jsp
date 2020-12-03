@@ -93,7 +93,7 @@
 	<%
 		for (Suite s : suites) {
 			out.println("<div class=\"viewPosting-suite\">");
-			out.println("<h1>" + s.getHeading() + "</h1>");
+			out.println("<h2>" + s.getHeading() + "</h2>");
 			out.println("<img src=\"" + Utils.getImageDir() + s.getImgPath() + "\">");
 			out.println("<p>" + s.getParagraph() + "</p>");
 			out.println("</div>");

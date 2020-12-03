@@ -41,7 +41,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>User order history</title>
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/purchaseStyle.css">
 </head>
 <body>
 	<!-- Header -->
@@ -82,7 +82,7 @@
 	    result.append("<h3 align=\"center\">My Order History</h3>");
 	    result.append("<br><table width=\"50%\" border=\"0\" align=\"center\">");
 	    //column header
-	    result.append("<tr bgcolor=\"aabbcc\"><td>Posting Title</td><td>Date of Order</td><td>Price * Quantity</td></tr>");
+	    result.append("<tr bgcolor=\"aabbcc\"><td>Posting Title</td><td>Date of Order</td><td>Amount Spent</td></tr>");
 		PreparedStatement ps1 = null;
 		PreparedStatement ps2 = null;
 		ResultSet rs1 = null;
