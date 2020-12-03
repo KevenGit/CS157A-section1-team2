@@ -64,8 +64,7 @@
 			<form id="LoginForm" action = "login.jsp" method = "post">
 				<input type="text" placeholder="Username" name = "login_username">
 				<input type="password" placeholder="Password" name = "login_password">
-				<button type="submit" class="btn" >Login</button>
-				<a href="">Forget password</a>
+				<button type="submit" class="btn">Login</button>
 			</form>
 						
 			<form id="RegForm" action = "register.jsp" method = "post">
@@ -81,7 +80,7 @@
 	</div>
 	
 	
-	<!-- js for account login/register -->
+	<!-- for account login/register -->
 	<script>
 	var loginForm = document.getElementById("LoginForm");
 	var regForm = document.getElementById("RegForm");
