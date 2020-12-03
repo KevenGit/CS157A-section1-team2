@@ -20,16 +20,6 @@ CREATE TABLE seller(
     PRIMARY KEY (id)
 );
 
-CREATE TABLE admin(
-	id INT NOT NULL AUTO_INCREMENT,
-    first_name VARCHAR(45) NOT NULL,
-    last_name VARCHAR(45) NOT NULL,
-    username VARCHAR(64) NOT NULL UNIQUE,
-    hash_pw CHAR(32) NOT NULL UNIQUE,
-    pw_salt CHAR(16) NOT NULL,
-    PRIMARY KEY (id)
-);
-
 CREATE TABLE postings(
 	id INT NOT NULL AUTO_INCREMENT,
     title VARCHAR(128) NOT NULL,
@@ -64,12 +54,6 @@ CREATE TABLE favorites(
 	user_id INT NOT NULL,
     post_id INT NOT NULL,
     PRIMARY KEY (user_id, post_id)
-);
-
-CREATE TABLE flag(
-	user_id INT NOT NULL,
-    post_id INT NOT NULL,
-    primary key (user_id, post_id)
 );
 
 CREATE TABLE orders(
@@ -138,23 +122,6 @@ insert into seller (id, phone) values (4, '6678467019');
 insert into seller (id, phone) values (1, '7090368811');
 insert into seller (id, phone) values (12, '5442537737');
 insert into seller (id, phone) values (18, '1724427960');
-
-# Fill admin table
-insert into admin (id, first_name, last_name, username, hash_pw, pw_salt) values (1, 'Keven', 'Lam', 'keven', '2KzvmWKBtJmRWv6ZPZSme8xTa0AHYpcr', 'aB1Dhyfh9rqqlqiF');
-insert into admin (id, first_name, last_name, username, hash_pw, pw_salt) values (2, 'Xuxiang', 'Huang', 'xuxih', 'nYM5FEC2NU2DDqdTeEopAGaukRUcx5wX', 'qvpQ7ua51YZp5COW');
-insert into admin (id, first_name, last_name, username, hash_pw, pw_salt) values (3, 'Isabel', 'Pham', 'hangryelmo', '54WrY7rQEQ75Pw0hasYCcsIQBahYwB0F', '86U3EaczwerMbJDD');
-insert into admin (id, first_name, last_name, username, hash_pw, pw_salt) values (4, 'Oates', 'Le Fevre', 'olefevre3', 'duFpYc9T11rkvtiOkdO6uaDGRxK2G2jT', 'dGyym2eGWmEzZOqp');
-insert into admin (id, first_name, last_name, username, hash_pw, pw_salt) values (5, 'Saleem', 'Yoseloff', 'syoseloff4', 'YsVPBY1mfpequpSvDNmQt8ERcB4cI2WY', 'k03UpXgwULsR8jwk');
-insert into admin (id, first_name, last_name, username, hash_pw, pw_salt) values (6, 'Geoff', 'Jillitt', 'gjillitt5', 'a5xoCjlzd0wsh0MZy2VA9WAyjKI9jXeK', 'AjWMS2nLelAU9TIB');
-insert into admin (id, first_name, last_name, username, hash_pw, pw_salt) values (7, 'Chelsy', 'Orange', 'corange6', 'IfqZZT0WB3tKjZBb3EA9jlvLptwMWC5s', 'KdnTK7PUxUOKn6Ca');
-insert into admin (id, first_name, last_name, username, hash_pw, pw_salt) values (8, 'Gunter', 'Arnhold', 'garnhold7', 'vsgwUd9b2OXDSkjbHk3QJnXqYGFhXmpl', '3DRfWQJg9saAqbIH');
-insert into admin (id, first_name, last_name, username, hash_pw, pw_salt) values (9, 'Helga', 'Harragin', 'hharragin8', 'z4zuSaIIQJqaV72fIMQPYVlbluDVkxn9', '63jIJPrqWh6ANxfS');
-insert into admin (id, first_name, last_name, username, hash_pw, pw_salt) values (10, 'Cordy', 'Murrhardt', 'cmurrhardt9', 'GMX2bSwADUQCsX0ekVA4p3IgcRHXAQp3', 'JbCE7VXMLYCQpO7s');
-insert into admin (id, first_name, last_name, username, hash_pw, pw_salt) values (11, 'Collen', 'Rouff', 'crouffa', 'pzV5Lyb2DUh9h8MgyQ7BFqAkEl1uuFrK', 'ldrmICKVYoYWEaXR');
-insert into admin (id, first_name, last_name, username, hash_pw, pw_salt) values (12, 'Sallyanne', 'Schruyer', 'sschruyerb', 'GWKKfZxHYfa4G2LzT2nTkaDuNWri1KWb', '8KZypcMaFj6blw1b');
-insert into admin (id, first_name, last_name, username, hash_pw, pw_salt) values (13, 'Dinnie', 'Phateplace', 'dphateplacec', '1niikC77uYM1PoGswdLhHeZ8PwYVyNV0', 'hcopKG4HpMR69WT5');
-insert into admin (id, first_name, last_name, username, hash_pw, pw_salt) values (14, 'Leslie', 'Simenot', 'lsimenotd', 'ZJPXCz2oayaGub6b6DURZQGhMkdSbfhH', '328xv4U0PhTb9EEa');
-insert into admin (id, first_name, last_name, username, hash_pw, pw_salt) values (15, 'Aylmar', 'Cowwell', 'acowwelle', 'LR2X0SPLKHDxdJLlP2FRoWAPNXfYCPD3', 'Ey1Rby9gAu9o2ycY');
 
 # Fill postings table
 insert into postings (id, title, price, category, region) values (1, 'Hair Trimmer', 5.99, 'Tool', 'Louisiana');
@@ -240,24 +207,6 @@ insert into favorites (user_id, post_id) values (15, 14);
 insert into favorites (user_id, post_id) values (13, 5);
 insert into favorites (user_id, post_id) values (10, 12);
 insert into favorites (user_id, post_id) values (19, 7);
-
-# Fill flag table 
-insert into flag (user_id, post_id) values (8, 15);
-insert into flag (user_id, post_id) values (20, 14);
-insert into flag (user_id, post_id) values (18, 12);
-insert into flag (user_id, post_id) values (10, 4);
-insert into flag (user_id, post_id) values (5, 8);
-insert into flag (user_id, post_id) values (2, 8);
-insert into flag (user_id, post_id) values (1, 14);
-insert into flag (user_id, post_id) values (7, 12);
-insert into flag (user_id, post_id) values (16, 15);
-insert into flag (user_id, post_id) values (19, 15);
-insert into flag (user_id, post_id) values (14, 15);
-insert into flag (user_id, post_id) values (6, 4);
-insert into flag (user_id, post_id) values (13, 4);
-insert into flag (user_id, post_id) values (12, 8);
-insert into flag (user_id, post_id) values (9, 14);
-
 
 insert into orders values (1, '6 Scofield Hill', '2020-04-27 12:48:57', 3);
 insert into orders values (2, '273 Towne Lane', '2020-02-06 20:39:08', 2);
