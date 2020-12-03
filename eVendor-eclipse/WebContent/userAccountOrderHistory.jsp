@@ -40,7 +40,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>User order history</title>
 <link rel="stylesheet" href="css/purchaseStyle.css">
 </head>
 <body>
@@ -72,18 +72,60 @@
 	<hr>
 
 	
-	<!-- display the list of favorite posting -->
-	<div class="order-list">
-		<div class="order-col">
-			<h3>My order</h3>
-			<table class="order-table">
-				<tr>
-				<th>Posting Title</th>
-				<th>Date of Order</th>
-				<th>SubTotal</th>
-			</table>
-		</div>
-	</div>
+	<!-- display the order history-->
+	<%
+		Connection conn = DbUtils.getConnection();
+		
+		String sql = "select * from (select order_id, post_id, title, date, price, quantity from orders join isfrom on orders.id = order_id join postings on postings.id = post_id)A natural join buys where user_id = ?;";
+					
+	    StringBuffer result = new StringBuffer();
+	    result.append("<h3 align=\"center\">My Order History</h3>");
+	    result.append("<br><table width=\"50%\" border=\"0\" align=\"center\">");
+	    //column header
+	    result.append("<tr bgcolor=\"aabbcc\"><td>Posting Title</td><td>Date of Order</td><td>Price * Quantity</td></tr>");
+		PreparedStatement ps1 = null;
+		PreparedStatement ps2 = null;
+		ResultSet rs1 = null;
+		ResultSet rs2 = null;
+		try {
+			ps1 = conn.prepareStatement(sql);			
+			ps1.setInt(1, Math.toIntExact(userId));			
+			rs1 = ps1.executeQuery();
+					
+			//int i = 0;
+	        while (rs1.next()) {
+	  			
+	  			int postId = rs1.getInt("post_id");
+	  			String date = rs1.getString("date");
+	  			int quantity = rs1.getInt("quantity");
+	  			String title = rs1.getString("title");
+	  			double price = rs1.getDouble("price");
+	  			double subtotal = quantity * price;
+	  			
+	  			result.append("<tr><br>");
+	  			
+	          	result.append("<td>").append("<a href=\"page?").append("post-id=" + postId + "\">").append(title + "</a></td>");
+	          	result.append("<td>").append(date).append("</td>");
+	          	result.append("<td>$").append(subtotal).append("</td>");
+
+	         	result.append("</tr>");
+	        }
+	        result.append("</table><br>");
+	    } catch (Exception e) {
+	         e.printStackTrace();
+	         result.append("Exception: " + e.getMessage() + "<br>");
+		} finally {
+			DbUtils.close(rs1);
+			DbUtils.close(ps1);
+			DbUtils.close(rs2);
+			DbUtils.close(ps2);
+			DbUtils.close(conn);
+		}
+		
+		%>
+		
+		<%=result.toString() %>
+
 
 </body>
 </html>

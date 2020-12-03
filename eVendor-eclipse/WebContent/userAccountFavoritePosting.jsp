@@ -79,46 +79,49 @@
 		<%
 		Connection conn = DbUtils.getConnection();
 
-	String sql = "SELECT id, title, price FROM postings WHERE id IN (SELECT post_id FROM favorites WHERE favorites.user_id = ?)";
+		String sql = "SELECT id, title, price FROM postings WHERE id IN (SELECT post_id FROM favorites WHERE favorites.user_id = ?)";
 
-    StringBuffer result = new StringBuffer();
-    result.append("<h3>My Favorite Postings</h3>");
-    result.append("<br><table width=\"100%\" border=\"0\" align=\"center\">");
-    //column header
-    result.append("<tr bgcolor=\"aabbcc\"><td>Title</td><td>Price</td></tr>");
-	PreparedStatement ps = null;
-	ResultSet rs = null;
-	try {
-		ps = conn.prepareStatement(sql);
-		ps.setInt(1, Math.toIntExact(userId));
+	    StringBuffer result = new StringBuffer();
+	    result.append("<h3 align=\"center\">My Favorite Postings</h3>");
+	    result.append("<br><table width=\"50%\" border=\"0\" align=\"center\">");
+	    //column header
+	    result.append("<tr bgcolor=\"aabbcc\"><td align=\"center\">Title</td><td>Price</td></tr>");
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, Math.toIntExact(userId));
+			
+			rs = ps.executeQuery();
+			int i = 0;
+	        while (rs.next()) {
+	  			
+	  			int postId = rs.getInt("id");
+	  			String title = rs.getString("title");
+	  			double price = rs.getDouble("price");
+	  			
+	  			result.append("<tr><br>");
+	  			
+	          	result.append("<td>").append("<a href=\"page?").append("post-id=" + postId + "\">").append(title + "</a></td>");
+	          	result.append("<td>$").append(price).append("</td>");
+
+	         	result.append("</tr>");
+	        }
+	        result.append("</table><br>");
+	    } catch (Exception e) {
+	         e.printStackTrace();
+	         //result.append("Exception: " + e.getMessage() + "<br>");
+		} finally {
+			DbUtils.close(rs);
+			DbUtils.close(ps);
+			DbUtils.close(conn);
+		}
 		
-		rs = ps.executeQuery();
-		int i = 0;
-        while (rs.next()) {
-  			
-  			int postId = rs.getInt("id");
-  			String title = rs.getString("title");
-  			double price = rs.getDouble("price");
-  			
-  			result.append("<tr><br>");
-  			
-          	result.append("<td>").append("<a href=\"page?").append("post-id=" + postId + "\">").append(title + "</a></td>");
-          	result.append("<td>$").append(price).append("</td>");
+		%>
+		
+		<%=result.toString() %>
 
-         	result.append("</tr>");
-        }
-        result.append("</table><br>");
-    } catch (Exception e) {
-         e.printStackTrace();
-         //result.append("Exception: " + e.getMessage() + "<br>");
-	} finally {
-		DbUtils.close(rs);
-		DbUtils.close(ps);
-		DbUtils.close(conn);
-	}
-	
-	%>
-	
-	<%=result.toString() %>
+
+
 </body>
 </html>

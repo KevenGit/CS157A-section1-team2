@@ -19,9 +19,7 @@ public class OrderDao {
 		String sql2 = "INSERT INTO buys (user_id, order_id) VALUES (?, ?)";
 		String sql3 = "INSERT INTO fulfills (seller_id, order_id) VALUES (?, ?)";
 		String sql4 = "INSERT INTO isFrom (post_id, order_id) VALUES (?, ?)";
-		String sql5 = "SELECT MAX(id) FROM" + 
-					"(SELECT id FROM orders " +
-					"WHERE delivery_address = ? AND quantity = ?)R";
+		String sql5 = "SELECT MAX(id) AS id FROM orders";
 		String sql6 = "UPDATE user SET balance = ? WHERE id = ?";
 		
 		List<Object> params = Arrays.asList(addr, quantity);
@@ -29,6 +27,7 @@ public class OrderDao {
 		try {
 			DbUtils.update(sql1, params);
 			
+			params = Arrays.asList();
 			int orderId = (Integer) DbUtils.query(sql5, params).get(0).get("id");
 			
 			params = Arrays.asList(userId, orderId);
