@@ -41,8 +41,9 @@
 	Connection conn = DbUtils.getConnection();
 
 	String sql = "SELECT id, title, category, price, region FROM postings WHERE id IN (SELECT post_id FROM post WHERE seller_id = ?)";
-
-    StringBuffer result = new StringBuffer();
+	//String sql = "SELECT id, title, category, price, region FROM postings WHERE id IN ";
+	
+	StringBuffer result = new StringBuffer();
     result.append("<br><table width=\"100%\" border=\"0\" align=\"center\">");
     //column header
     result.append("<tr bgcolor=\"aabbcc\"><td>Title</td><td>Price</td><td>Action</td></tr>");
@@ -120,6 +121,8 @@
 	<table width="100%">
 		<tr><td align="left"><b>Home of <%=userFirstName%> <%=userLastName%></b></td>
 			<td align="left">Email: <%=userEmail%></td>
+			<td align="right"><a href ='becomeSeller.jsp'>Become Seller</a></td>
+			<td align="right"><a href = 'manageBalance.jsp'>Balance</a></td>
 			<td align="right"><a href ='editProfile.jsp'>Edit Profile</a></td>
 		</tr>
 	</table>

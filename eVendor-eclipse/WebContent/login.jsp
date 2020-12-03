@@ -8,6 +8,7 @@
 <%@ page import="com.cs157a.evendor.util.*"%>
 <%@ page import="com.cs157a.evendor.dao.SellerDao"%>
 <%!
+//method that checks to see if the username password matches with any user from the db
     public boolean validate(String username, String password, User user) {
 		if(user != null){
 			ByteSource salt = ByteSource.Util.bytes(Base64.getDecoder().decode(user.getPwSalt()));
@@ -24,7 +25,7 @@
     String msg = "";
     String username = request.getParameter("login_username");
     String password = request.getParameter("login_password");
-    Class.forName("com.mysql.cj.jdbc.Driver");
+    //Class.forName("com.mysql.cj.jdbc.Driver");
     Connection conn = DbUtils.getConnection();
     //Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/e_vendor_data_test?serverTimezone=EST5EDT","root", "Yumi2Shoyu");
     User user = DbUtils.getUser(conn, username);
@@ -36,6 +37,7 @@
         session.setAttribute("first_name", user.getFirstName());
         session.setAttribute("last_name", user.getLastName());
         session.setAttribute("email", user.getEmail());
+        session.setAttribute("balance", user.getBalance());
         
         // Set phone to see if Seller
         String phone = SellerDao.getSellerPhone(user);
