@@ -44,7 +44,7 @@
 				<button type="submit" class="btn">Login</button>
 			</form>
 						
-			<form id="RegForm" action = "register.jsp" method = "post">
+			<form id="RegForm" action = "adminRegisterProcessing.jsp" method = "post">
 				<input type="text" placeholder="Username" name = "admin_regis_username">
 				<input type="text" placeholder="First Name" name = "admin_regis_first_name"> 
 				<input type="text" placeholder="Last Name" name = "admin_regis_last_name"> 

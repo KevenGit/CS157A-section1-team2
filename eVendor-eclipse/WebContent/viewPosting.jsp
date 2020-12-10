@@ -8,7 +8,9 @@
 <%  // Check if user logged in (username and accountId should be set after logging in.
     // If user is Seller, phone is set
     String username = (String) session.getAttribute("username");
-    long userId = (Long) session.getAttribute("userId");   //the account id
+	long userId = 0;
+	if (session.getAttribute("userId") != null)
+		userId = (Long) session.getAttribute("userId");
     String phone = (String) session.getAttribute("phone");
     String loginLink = "<a href=\"logout.jsp\">Logout</a>";
     String postLink = "<a href=\"createPosting.jsp\">Post</a>";
@@ -86,6 +88,16 @@
                     	if (loggedIn)
                     		out.println("<button type=\"submit\" name=\"submit\" value=\"favorite\">"
                     					+ "Favorite</button>");
+                    %>
+                </form>
+                
+                <form action="postings" method="POST">
+                    <input type="hidden" name="post-id" value=<%= posting.getId() %>>
+                    <input type="hidden" name="user-id" value=<%= Math.toIntExact(userId) %>>
+                    <%
+                    	if (loggedIn)
+                    		out.println("<button type=\"submit\" name=\"submit\" value=\"flag\">"
+                    					+ "Flag</button>");
                     %>
                 </form>
             </div>

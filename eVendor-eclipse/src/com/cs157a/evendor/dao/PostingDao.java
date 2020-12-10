@@ -9,7 +9,6 @@ import com.cs157a.evendor.util.DbUtils;
 public class PostingDao {
 	
 	private static final String SELECT_ID_SQL = "SELECT * FROM postings WHERE id = ?";
-	private static final String SELECT_CATEGORY_SQL = "SELECT * FROM postings WHERE category = ?";
 	private static final String SEARCH_SQL = "SELECT * FROM " +
 											"(SELECT * FROM postings " + 
 											"WHERE category LIKE ? AND region LIKE ? AND price >= ? AND price <= ?)R";
@@ -31,29 +30,6 @@ public class PostingDao {
 								(String) tuple.get("category"),
 								(Double) tuple.get("price"),
 								(String) tuple.get("region"));
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return result;
-	}
-	
-	public static List<Posting> selectByCategory(String category) {
-		List<Posting> result = new ArrayList<>();
-		
-		try {
-			
-			List<Object> params = Arrays.asList(category);
-			List<Map<String, Object>> rs = DbUtils.query(SELECT_CATEGORY_SQL, params);
-			
-			for (Map<String, Object> t : rs) {
-				Posting p = new Posting((Integer) t.get("id"),
-										(String) t.get("title"),
-										(String) t.get("category"),
-										(Double) t.get("price"),
-										(String) t.get("region"));
-				result.add(p);
-			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -112,25 +88,6 @@ public class PostingDao {
 		}
 		
 		return postingId;
-	}
-	
-	public static void deletePosting(int postId) {
-		String sqls[] = new String[5];
-		sqls[0] = "DELETE FROM postings WHERE id = ?";
-		sqls[1] = "DELETE FROM post WHERE post_id = ?";
-		sqls[2] = "DELETE FROM favorites WHERE post_id = ?";
-		sqls[3] = "DELETE FROM flag WHERE post_id = ?";
-		sqls[4] = "DELETE FROM suite WHERE post_id = ?";
-		
-		List<Object> params = Arrays.asList(postId);
-		
-		try {
-			for (String s : sqls) {
-				DbUtils.update(s, params);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 	}
 	
 	public static void addFavorite(int userId, int postId) {

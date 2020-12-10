@@ -34,11 +34,11 @@ public class PostingServlet extends HttpServlet {
 		case "favorite":
 			addFavorite(request, response);
 			break;
-		case "delete-posting":
-			deletePosting(request, response);
+		case "flag":
+			addFlag(request, response);
 			break;
 		default:
-			displayCategoryList(request, response);
+			response.getWriter().append("Error");
 		}
 	}
 
@@ -46,21 +46,20 @@ public class PostingServlet extends HttpServlet {
 		doGet(request, response);
 	}
 	
-	private void displayCategoryList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String category = request.getParameter("name").toLowerCase();
-		List<Posting> result = PostingDao.selectByCategory(category);
-		request.setAttribute("result", result);
-		request.setAttribute("category", category);
-		
-		RequestDispatcher dispatch = request.getRequestDispatcher("category-list.jsp");
-		dispatch.forward(request, response);
-	}
-	
 	private void addFavorite(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int postId = Integer.parseInt(request.getParameter("post-id"));
 		int userId = Integer.parseInt(request.getParameter("user-id"));
 		
 		PostingDao.addFavorite(userId, postId);
+		
+		response.sendRedirect("userAccount.jsp");
+	}
+	
+	private void addFlag(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int postId = Integer.parseInt(request.getParameter("post-id"));
+		int userId = Integer.parseInt(request.getParameter("user-id"));
+		
+		PostingDao.addFlag(userId, postId);
 		
 		response.sendRedirect("userAccount.jsp");
 	}
@@ -97,13 +96,5 @@ public class PostingServlet extends HttpServlet {
 		request.setAttribute("post-id", postingId);
 		
 		getServletContext().getRequestDispatcher("/page?post-id=" + postingId).forward(request, response);
-	}
-	
-	private void deletePosting(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int postId = Integer.parseInt(request.getParameter("post-id"));
-		PostingDao.deletePosting(postId);
-		
-		RequestDispatcher dispatch = request.getRequestDispatcher("index.jsp");
-		dispatch.forward(request, response);
 	}
 }

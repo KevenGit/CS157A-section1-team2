@@ -8,9 +8,9 @@
 	
 	// Check if admin logged in 
     String username = (String) session.getAttribute("admin_username");     //username 
-    long adminId = 0;
+    int adminId = 0;
     if(session.getAttribute("adminId") != null)
-    	adminId = (Long) session.getAttribute("adminId");   //the account id
+    	adminId = (Integer) session.getAttribute("adminId");   //the account id
     String adminFirstName = (String) session.getAttribute("admin_first_name");
     String adminLastName = (String) session.getAttribute("admin_last_name");
     
@@ -26,42 +26,35 @@
 		//connect to retrieve info
 		Connection conn = DbUtils.getConnection();
 
-		String sql = "SELECT id, title, category, price, region FROM postings WHERE id IN (SELECT post_id FROM post WHERE seller_id = ?)";
-		//String sql = "SELECT id, title, category, price, region FROM postings WHERE id IN ";
+		String sql = "select post_id, title, first_name, last_name, COUNT(*) AS flags " +
+				"from ((select post_id, title, first_name, last_name from (postings join post on postings.id = post_id join user on user.id = seller_id))A natural join flag) " +
+				"GROUP BY post_id " +
+				"ORDER BY flags DESC";
 		
-		flaggedResult.append("<h3 align=\"left\">Flagged Postings</h3>");
-		flaggedResult.append("<table width=\"100%\" border=\"0\" align=\"center\">");
-	    //column header
-	    flaggedResult.append("<tr bgcolor=\"aabbcc\"><td>Post Title</td><td>Seller</td><td># Flags</td><td>Action</td></tr>");
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, Math.toIntExact(adminId));
 			
 			rs = ps.executeQuery();
 			int i = 0;
 	        while (rs.next()) {
 	            i++;
-	            int id = rs.getInt(1);
+	            int post_id = rs.getInt(1);
 	            String title = rs.getString(2);
-	            String category = rs.getString(3);
-	            double price = rs.getDouble(4);
-	            String region = rs.getString(5);
-	            String detailPage = "page?post-id=" + id;
-	            String removePage = "removePosting.jsp?postId=" + id;
+	            String firstName = rs.getString(3);
+	            String lastName = rs.getString(4);
+	            int flags = rs.getInt(5);
+	            String removePosting = "admin?post-id=" + post_id + "&action=admin-delete-posting";
 	            
 	           
-	            if (i % 2 == 0)
-	            	flaggedResult.append("<tr bgcolor=\"eeeeee\">");
-	            else
-	            	flaggedResult.append("<tr bgcolor=\"f0f8ff\">");
-	            flaggedResult.append("<td><a href=\"").append(detailPage).append("\">").append(title).append("</a></td>");
-	            flaggedResult.append("<td>$").append(price).append("</td>");
-	            flaggedResult.append("&nbsp;|&nbsp;<a href=\"").append(removePage).append("\">Remove</a></td>");
+	            flaggedResult.append("<tr>");
+	            flaggedResult.append("<td>" + title + "</td>");
+	            flaggedResult.append("<td>" + firstName + " " + lastName + "</td>");
+	            flaggedResult.append("<td>" + flags + "</td>");
+	            flaggedResult.append("<td><a href=\"").append(removePosting).append("\">").append("Remove</a></td>");
 	            flaggedResult.append("</tr>");
 	        }
-	        flaggedResult.append("</table><br>");
 	    } catch (Exception e) {
 	         e.printStackTrace();
 	         flaggedResult.append("Exception: " + e.getMessage() + "<br>");
@@ -79,41 +72,33 @@
 		conn = DbUtils.getConnection();
 		
 		//refresh sql statement
-		sql = "SELECT id, title, category, price, region FROM postings WHERE id IN (SELECT post_id FROM post WHERE seller_id = ?)";
-		//String sql = "SELECT id, title, category, price, region FROM postings WHERE id IN ";
+		sql = "SELECT id, username, first_name, last_name, email FROM user WHERE id NOT IN (SELECT id FROM seller)";
 		
-		userListResult.append("<h3 align=\"left\">List of Users</h3>");
-		userListResult.append("<table width=\"100%\" border=\"0\" align=\"center\">");
-	    //column header
-	    userListResult.append("<tr bgcolor=\"aabbcc\"><td>Post Title</td><td>Seller</td><td># Flags</td><td>Action</td></tr>");
 		//refresh
 	    ps = null;
 		rs = null;
 		try {
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, Math.toIntExact(adminId));
 			
 			rs = ps.executeQuery();
 			int i = 0;
 	        while (rs.next()) {
 	            i++;
-	            int id = rs.getInt(1);
-	            String title = rs.getString(2);
-	            String category = rs.getString(3);
-	            double price = rs.getDouble(4);
-	            String region = rs.getString(5);
-	            String removePage = "removePosting.jsp?postId=" + id;
+	            int user_id = rs.getInt(1);
+	            String uname = rs.getString(2);
+	            String firstName = rs.getString(3);
+	            String lastName = rs.getString(4);
+	            String email = rs.getString(5);
+	            String removeUser = "admin?user-id=" + user_id + "&action=admin-delete-user";
 	            
 	           
-	            if (i % 2 == 0)
-	            	userListResult.append("<tr bgcolor=\"eeeeee\">");
-	            else
-	            	userListResult.append("<tr bgcolor=\"f0f8ff\">");
-	            userListResult.append("<td>$").append(price).append("</td>");
-	            userListResult.append("&nbsp;|&nbsp;<a href=\"").append(removePage).append("\">Remove</a></td>");
+	            userListResult.append("<tr>");
+	            userListResult.append("<td>" + firstName + " " + lastName + "</td>");
+	            userListResult.append("<td>" + uname + "</td>");
+	            userListResult.append("<td>" + email + "</td>");
+	            userListResult.append("<td><a href=\"").append(removeUser).append("\">").append("Remove</a></td>");
 	            userListResult.append("</tr>");
 	        }
-	        flaggedResult.append("</table><br>");
 	    } catch (Exception e) {
 	         e.printStackTrace();
 	         userListResult.append("Exception: " + e.getMessage() + "<br>");
@@ -131,41 +116,33 @@
 		conn = DbUtils.getConnection();
 		
 		//refresh sql statement
-		sql = "SELECT id, title, category, price, region FROM postings WHERE id IN (SELECT post_id FROM post WHERE seller_id = ?)";
-		//String sql = "SELECT id, title, category, price, region FROM postings WHERE id IN ";
+		sql = "SELECT id, username, first_name, last_name, email FROM user WHERE id IN (SELECT id FROM seller)";
 		
-		sellerListResult.append("<h3 align=\"left\">List of Users</h3>");
-		sellerListResult.append("<table width=\"100%\" border=\"0\" align=\"center\">");
-	    //column header
-	    sellerListResult.append("<tr bgcolor=\"aabbcc\"><td>Post Title</td><td>Seller</td><td># Flags</td><td>Action</td></tr>");
 		//refresh
 	    ps = null;
 		rs = null;
 		try {
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, Math.toIntExact(adminId));
 			
 			rs = ps.executeQuery();
 			int i = 0;
 	        while (rs.next()) {
 	            i++;
-	            int id = rs.getInt(1);
-	            String title = rs.getString(2);
-	            String category = rs.getString(3);
-	            double price = rs.getDouble(4);
-	            String region = rs.getString(5);
-	            String removePage = "removePosting.jsp?postId=" + id;
+	            int seller_id = rs.getInt(1);
+	            String uname = rs.getString(2);
+	            String firstName = rs.getString(3);
+	            String lastName = rs.getString(4);
+	            String email = rs.getString(5);
+	            String removeUser = "admin?seller-id=" + seller_id + "&action=admin-delete-seller";
 	            
 	           
-	            if (i % 2 == 0)
-	            	userListResult.append("<tr bgcolor=\"eeeeee\">");
-	            else
-	            	sellerListResult.append("<tr bgcolor=\"f0f8ff\">");
-	            sellerListResult.append("<td>$").append(price).append("</td>");
-	            sellerListResult.append("&nbsp;|&nbsp;<a href=\"").append(removePage).append("\">Remove</a></td>");
+	            sellerListResult.append("<tr>");
+	            sellerListResult.append("<td>" + firstName + " " + lastName + "</td>");
+	            sellerListResult.append("<td>" + uname + "</td>");
+	            sellerListResult.append("<td>" + email + "</td>");
+	            sellerListResult.append("<td><a href=\"").append(removeUser).append("\">").append("Remove</a></td>");
 	            sellerListResult.append("</tr>");
 	        }
-	        flaggedResult.append("</table><br>");
 	    } catch (Exception e) {
 	         e.printStackTrace();
 	         userListResult.append("Exception: " + e.getMessage() + "<br>");
@@ -189,6 +166,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Homepage of Admin</title>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 	<div class="header">	
@@ -204,22 +182,66 @@
 		</nav>
 	</div></div></div>
 
-<!--  Admin basic info -->
-<table width="100%">
-		<tr><td align="left"><b>Home of <%=adminFirstName%> <%=adminLastName%></b></td>
-		</tr>
-	</table>
-	<hr>
+	<div class="adminIndex-wrapper">
+		<!--  Admin basic info -->
+		<div class="adminIndex-infobox">
+            <h2>Admin: <%=adminFirstName + " " + adminLastName %></h2>
+        </div>
 	
-	<!-- Display table to manage flagged postings -->
-	<%=flaggedResult%>
-	<br>
-	<!-- Display table to manage users-->
-	<%=userListResult%>
-	<br>
-	<!-- Display table to manage sellers -->
-	<%=sellerListResult%>
+		<!-- Display table to manage flagged postings -->
+		<div class="adminIndex-table">
+            <h3>Flagged Postings</h3>
+            <table class="search-result-table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Seller</th>
+                        <th>Number of Flags</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                	<%=flaggedResult.toString() %>
+                </tbody>
+            </table>
+        </div>
+        
+		<!-- Display table to manage users-->
+		<div class="adminIndex-table">
+            <h3>Users</h3>
+            <table class="search-result-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                	<%=userListResult.toString() %>
+                </tbody>
+            </table>
+        </div>
+        
+		<!-- Display table to manage sellers -->
+		<div class="adminIndex-table">
+            <h3>Sellers</h3>
+            <table class="search-result-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                	<%=sellerListResult.toString() %>
+                </tbody>
+            </table>
+        </div>
 	
-	
+	</div>
 </body>
 </html>
