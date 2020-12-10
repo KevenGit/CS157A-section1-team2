@@ -11,6 +11,7 @@ import java.util.Properties;
 import java.util.*;
 
 import com.cs157a.evendor.model.User;
+import com.cs157a.evendor.model.Admin;
 
 public class DbUtils {
 			
@@ -185,6 +186,35 @@ public class DbUtils {
             	long balance = rs.getLong(8);
             	result = new User(id, username, hash_pw, pw_salt, first_name, 
             			 last_name, email, balance);
+            }
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+            close(rs);
+            close(ps);
+            close(conn);
+		}
+		return result;
+	}
+	
+	public static Admin getAdmin(Connection conn, String username) {
+		Admin result = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			String sql = "SELECT id, first_name, last_name, username, hash_pw, pw_salt FROM admin WHERE username = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, username);
+			rs = ps.executeQuery();
+            if (rs.next()) {
+            	int id = rs.getInt(1);
+            	String first_name = rs.getString(2);
+            	String last_name = rs.getString(3);
+            	//String username = rs.getString(4);
+            	String hash_pw = rs.getString(5);
+            	String pw_salt = rs.getString(6);
+
+            	result = new Admin(id, first_name, last_name, username, hash_pw, pw_salt);
             }
 		} catch (Exception e) {
 			e.printStackTrace();
