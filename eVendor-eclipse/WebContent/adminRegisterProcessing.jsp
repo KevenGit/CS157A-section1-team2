@@ -47,7 +47,7 @@
             msg = e.getMessage();
         }
         DbUtils.close(conn);
-        response.sendRedirect("adminIndex.jsp?status=" + msg);
+        response.sendRedirect("adminLogin.jsp?status=" + msg);
     } else {
         msg = "Invalid input";
         response.sendRedirect("adminLogin.jsp?status=" + msg);
